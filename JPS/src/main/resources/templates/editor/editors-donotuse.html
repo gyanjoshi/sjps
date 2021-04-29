@@ -1,0 +1,135 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ghodaghodi multiple campus Sukkhad, Kailai - Research Journal">
+<title>Editors - Ghodaghodi multiple campus Sukkhad, Kailai - Research Journal </title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+	rel="stylesheet">
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link th:href="@{/adminstatic/css/admin.css}" rel="stylesheet">
+<script th:src="@{/adminstatic/js/admin.js}"></script>
+
+</head>
+
+<body>
+<div th:replace="fragments/headerlayout :: header"></div>
+	<div class="page-wrapper chiller-theme toggled">
+
+		<div th:replace="editor/editorpage :: sidebar"></div>
+
+		<main class="page-content">
+		<div class="container-fluid">
+			<hr>
+			<div class="row" style = "margin-top: 51px">
+				<div class="container">
+					<h1 class="title">Editors List</h1>
+				</div>
+
+			</div>
+
+			<!-- start of main body -->
+			<div class="container">
+				<span th:if="${message != null}" th:text="${message}"></span>
+				<div class="columns">
+					<div class="column is-full">
+						<div class="field is-grouped">
+							<div class="col-sm-10">
+								<a th:href="@{/editor/add-editor}"
+									class="button is-success is-small">Add Editor</a>
+							</div>
+						</div>
+						<table
+							class="table content is-small is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Address</th>									
+									<th>E-mail</th>
+									<th>Phone No.</th>
+									<th>Profile Picture</th>
+									<th>Action</th>
+
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr th:each="editor : ${editors}">
+
+									<td th:text="${editor.fullName}"></td>
+									<td th:text="${editor.address1}"></td>									
+									<td th:text="${editor.email}"></td>
+									<td th:text="${editor.phone}"></td>
+									<td><img th:if="*{profiles.get(editor.id) != null}"
+										th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(profiles.get(editor.id))}}"
+										width="50" height="50" /></td>
+									<td><a th:href="@{/editor/edit-editor(id=${editor.id})}"
+										class="button is-primary is-small">Edit</a>
+										<button type="button" class="btn btn-danger"
+											data-toggle="modal" data-target="#myModal" th:attr="data-target='#myModal'+${editor.id}">Delete</button>
+										<div class="modal fade" th:id="myModal+${editor.id}">
+											<!-- The Modal -->
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title">Are you sure?</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Close</button>
+														<a th:href="@{/editor/delete-editor(id=${editor.id})}">
+														<button type="button" class="btn btn-success">Yes</button>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<a th:href="@{/editor/add-profile(id=${editor.id})}">
+											<button type="button" class="btn btn-link">Add Profile</button>
+										</a>																				
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- end of main body -->
+
+		</div>
+		</main>
+		<!-- page-content" -->
+	</div>
+	<!-- page-wrapper -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>

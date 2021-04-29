@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<div class="page-wrapper chiller-theme toggled ">
+
+<div th:fragment = "journalsidebar">
+ 
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand x">
+        <a href="#">Journal-All Issues</a>
+        
+      </div>
+     
+      <!-- sidebar-header  -->
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Search...">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu">
+        <ul>     
+          <li><a th:if="${currentjournal != null}" th:href="@{/current(jid=${currentjournal.Id})}">Current Issue</a></li>   
+          <li><a th:if="${currentjournal == null}" href="#">Current Issue</a></li>        
+		  
+		  <li><a th:if="${currentjournal != null}" th:href="@{/journalarchives(jid=${currentjournal.Id})}">Archive</a></li>
+		  <li><a th:if="${currentjournal == null}" href="#">Archive</a></li>
+		  
+		  <li><a th:href="@{/alljournals}">All Journals</a></li>
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+   
+  </nav>
+  </div>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    
+</body>
+
+</html>

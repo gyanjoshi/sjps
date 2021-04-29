@@ -1,0 +1,134 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta>
+<title>Edit Editor Information</title>
+
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ghodaghodi multiple campus Sukkhad, Kailai - Research Journal">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link th:href="@{/adminstatic/css/admin.css}" rel="stylesheet">
+<script th:src="@{/adminstatic/js/admin.js}"></script>
+</head>
+
+<body>
+<div th:replace="fragments/headerlayout :: header"></div>
+<div class="page-wrapper chiller-theme toggled">
+ <div th:replace = "editor/editorpage :: sidebar"></div>
+ <main class="page-content">
+    <div class="container-fluid">
+      <hr>
+      
+       	<section class="section">
+		<div class="container">
+			<h4 class="title">Editor Form</h4>
+			
+		</div>
+		</section>
+      
+      <!-- start of main body -->
+     <div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="box">					
+					<form th:object="${editor}" method="POST" th:action="@{/editor/edit-editor}"  class="form-horizontal" enctype="multipart/form-data" >					
+						
+						    <div class="form-group">
+						    <input th:field="*{id}" class="form-control" id="id" type="hidden"/>
+						    <label class="control-label col-sm-2" for="title" >Title:</label>
+							<select th:field="*{title}" class="form-control" id="title" name="title" required="required">
+						    <option value="0">Select Title</option>
+						    <option th:each="title1 : ${titles}" th:value="${title1.title}" th:text="${title1.title}" ></option>
+						    </select>
+						</div>						
+						<div class="form-group">
+								<label class="control-label col-sm-2" for="fullname">Full Name</label>
+								<div class="col-sm-10">
+									<input th:field="*{fullName}" id="fullname" class="form-control" placeholder="Please enter full name"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+							<label class="control-label col-sm-2" for="address1">Address1</label>
+							<div class="col-sm-10">
+								<input th:field="*{address1}" id="address1" class="form-control" placeholder="Please enter address1" />
+							</div>
+							</div>
+							<div class="form-group">
+							<label class="control-label col-sm-2" for="address2">Address2</label>
+							<div class="col-sm-10">
+								<input th:field="*{address2}" id="address2" class="form-control" placeholder="Please enter address2" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="email">Email</label>
+							<div class="col-sm-10">
+								<input type="email" th:field="*{email}" id="email" class="form-control" placeholder="Please enter email" />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="phone">Phone:</label>
+							<div class="col-sm-10">
+								<input th:field="*{phone}" id="phone" class="form-control" placeholder="Please enter phone" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="city">City</label>
+							<div class="col-sm-10">
+								<input th:field="*{city}" id="city" class="form-control" placeholder="Please enter city" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="state">State</label>
+							<div class="col-sm-10">
+								<input th:field="*{state}" id="state" class="form-control" placeholder="Please enter state" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="country">Country</label>
+							<div class="col-sm-10">
+								<input th:field="*{country}" id="country" class="form-control" placeholder="Please enter country" />
+							</div>
+						</div>		
+						
+								<div class="form-group">
+								<label class="control-label col-sm-2" for="qualification">Qualification</label>
+								<div class="col-sm-10">
+									<select th:field="*{qualification}" class="form-control" id="qualification" name="qualification" required="required">
+								    <option value="0">Select Qualification</option>
+								    <option th:each="q : ${qualifications}" th:value="${q.qualification}" th:text="${q.qualification}" ></option>
+								    </select>
+								</div>
+								</div>
+		
+						
+						
+						<div class="field is-grouped">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button class="btn btn-default">Submit</button>
+							</div>
+							<div class="col-sm-offset-2 col-sm-10">
+								<a th:href="@{/editor/editors}" class="btn btn-default">Cancel</a>
+							</div>
+						</div>						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+      <!-- end of main body -->
+      
+</div>
+  </main>
+</div>
+</body>
+</html> 

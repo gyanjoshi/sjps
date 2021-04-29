@@ -1,0 +1,169 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ghodaghodi multiple campus Sukkhad, Kailai - Research Journal">
+   	
+    
+    <title>Editor Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	 <link th:href="@{/adminstatic/css/admin.css}" rel="stylesheet">
+	 <script th:src="@{/adminstatic/js/admin.js}"></script>
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+</head>
+
+<body>
+<div th:replace="fragments/headerlayout :: header"></div>
+<div class="page-wrapper chiller-theme toggled">
+<div th:fragment = "sidebar">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper" >
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+     
+     <a th:href="@{/}"><span class="glyphicon glyphicon-home">  Editor Menu</span></a>
+        
+        <div id="close-sidebars">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+       <div class="user-pic">
+          <img th:if="*{currentProfile != null}"  th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(currentProfile)}}" style="
+    width: 30px;
+    height: 30px;"/>
+        </div> 
+        <div class="user-info">
+          
+          <span th:text ="${#authentication.getName()}"></span>
+          <span class="user-role">Editor</span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+          </span>
+        </div>
+      </div>
+      <!-- sidebar-header  -->
+     <!--  <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Search...">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>General</span>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Journal</span>             
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+              	<li>
+                  <a th:href="@{/editor/createjournal}">Create New Journal                    
+                  </a>
+                </li>
+                <li>
+                  <a th:href="@{/editor/viewjournals}">View Journals</a>
+                </li>                
+              </ul>
+            </div>
+           </li>
+           <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Journal Issues</span>             
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+              	
+                <li>
+                  <a th:href="@{/editor/newissue}">Create New Issue                    
+                  </a>
+                </li>
+                <li>
+                  <a th:href="@{/editor/viewjournalissues}">View Issues</a>
+                </li>                
+              </ul>
+            </div>
+           </li>
+          <li class="sidebar-dropdown">
+            <a th:href="@{/editor/pendingreview}">
+              <i class="fa fa-shopping-cart"></i>
+              <span>Pending Review</span>
+            </a>
+           </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="far fa-gem"></i>
+              <span>Publish Journal</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a th:href="@{/editor/preparejournal}">Prepare                     
+                  </a>
+                </li>
+                <li>
+                  <a th:href="@{/editor/publishjournal}">Publish</a>
+                </li>                
+              </ul>
+            </div>
+           </li>
+           <li> <a th:href="@{/editor/editors}"> <i class="far fa-gem"></i>
+              	<span>Editors</span>
+            	</a>
+            </li>
+           <li>
+           <a th:href="@{/logout}">
+        	<i class="fa fa-power-off"></i>Logout
+      		</a>
+      	</li>
+        
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    
+  </nav>
+  <!-- sidebar-wrapper  -->
+  </div>
+  
+  
+  
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+
+<body>
+<div th:replace="fragments/headerlayout :: header"></div>
+ <div th:fragment = "resultsList" th:unless="${#lists.isEmpty(journalissues)}" id="results-block">
+ 						<span th:text="${title}"></span>
+						<img th:if="*{coverimage != null}"  th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(coverimage)}}" width="100" height="200"/>
+						
+						<span th:if="*{journalissues == null}" th:text="${message}"></span>
+						
+						<table th:if="*{journalissues != null}" class="table content is-small is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+							<thead>
+							<tr>
+								<th>Volume#</th>
+								<th>Issue#</th>
+								<th>Year</th>
+								<th>Month</th>
+								<th>status</th>							
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="journal : ${journalissues}">
+
+							<td th:text="${journal.VolumeNum}"></td>
+							<td th:text="${journal.IssueNum}"></td>
+							<td th:text="${journal.year}"></td>
+							<td th:text="${journal.month}"></td>
+							<td th:text="${journal.status}"></td>						
+							
+							<td>
+								<a th:if="${journal.status!='Published'}" th:href="@{/editor/editjournalissue(jid=${journal.Id})}"  class="button is-primary is-small">Edit</a>
+								<button th:if="${journal.status!='Published'}" type="button" class="btn btn-danger"
+											data-toggle="modal" data-target="#myModal" th:attr="data-target='#myModal'+${journal.Id}">Delete</button>
+										<div class="modal fade" th:id="myModal+${journal.Id}">
+											<!-- The Modal -->
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title">Are you sure?</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Close</button>
+														<a th:href="@{/editor/deletejournalissue(jid=${journal.Id})}">
+														<button type="button" class="btn btn-success">Yes</button>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+							</td>
+								 
+
+						</tr>
+					</tbody> 
+				</table>
+</div>
+</body>
+</html> 

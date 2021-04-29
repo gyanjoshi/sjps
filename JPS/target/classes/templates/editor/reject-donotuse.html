@@ -1,0 +1,82 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta>
+<title>Reject Article</title>
+
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ghodaghodi multiple campus Sukkhad, Kailai - Research Journal">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <link th:href="@{/adminstatic/css/admin.css}" rel="stylesheet">
+ <script th:src="@{/adminstatic/js/admin.js}"></script>
+ <script type="text/javascript" th:src="@{/ckeditor/ckeditor.js}"></script>
+</head>
+
+<body>
+<div th:replace="fragments/headerlayout :: header"></div>
+<div class="page-wrapper chiller-theme toggled">
+ <div th:replace = "/editor/editorpage :: sidebar"></div>
+ <main class="page-content">
+    <div class="container-fluid">
+      <hr>
+      
+       	<section class="section"  style = "margin-top: 51px">
+		<div class="container">
+			<h4 class="title">Reject Article</h4>
+			
+		</div>
+	</section>
+      
+      <!-- start of main body -->
+     <div class="container">
+		<div class="columns">
+			<div class="column is-full">
+				<div class="box">
+					<form th:object="${article}" th:action="@{/editor/reject}" method="POST">
+						<input type="hidden" th:field="${article.Id}" />
+						<input type="hidden" th:field="${author.userName}" />
+						
+						<div class="form-group">
+							<label class="label is-small">Article title</label>
+							<div class="col-sm-10">
+								<span th:utext="*{topic}" class="form-control" ></span>
+							</div>
+						</div>
+											
+						<div class="form-group">
+					     <label for="usr">Message for author:</label>
+					      <textarea cols="20" rows="10"  name="message" id="message"> 
+					      </textarea>
+					      <script type="text/javascript">
+					        CKEDITOR.replace('message' );
+					      </script>
+					    </div>
+						
+						<div class="field is-grouped">
+							<div class="col-sm-10">
+								<button class="button is-success is-small">Submit</button>
+							</div>
+							<div class="col-sm-10">
+								<a th:href="@{/editor/pendingreview}" class="button is-danger is-small">Cancel</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+      <!-- end of main body -->
+      
+	</div>
+  </main>
+</div>
+</body>
+</html> 
