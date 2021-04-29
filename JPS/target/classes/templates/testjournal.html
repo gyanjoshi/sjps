@@ -1,0 +1,192 @@
+ <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description"
+	content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+<title>Journals</title>
+<link th:href="@{/adminstatic/css/admin.css}" rel="stylesheet">
+ <script th:src="@{/adminstatic/js/admin.js}"></script>
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+	rel="stylesheet">
+	
+
+
+
+<!--resources for header layout  -->
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+ <link href="style.css" rel="stylesheet">
+ <link id="switcher" href="css/themes/default-theme.css" rel="stylesheet">
+ <link rel="stylesheet" href="css/animate.css">
+  <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>   
+    <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'> 
+    <!-- Font awesome css file-->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+
+<!--  -->
+ <!-- Bootstrap css file-->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font awesome css file-->
+     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"> 
+    <!-- Superslide css file-->
+    <link rel="stylesheet" th:href="@{/css/superslides.css}">
+    <!-- Slick slider css file -->
+     <link th:href="@{/css/slick.css}" rel="stylesheet"> 
+    <!-- Circle counter cdn css file -->
+    <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/css/jquery.circliful.css'>  
+    <!-- smooth animate css file -->
+    <link rel="stylesheet" th:href="@{/css/animate.css}"> 
+    
+    <!-- gallery slider css -->
+    <link type="text/css" media="all" rel="stylesheet" th:href="@{/css/jquery.tosrus.all.css}" />    
+    <!-- Default Theme css file -->
+    <link id="switcher" th:href="@{/css/themes/lite-blue-theme.css}" rel="stylesheet">
+    <!-- Main structure css file -->
+    <link th:href="@{/style.css}" rel="stylesheet">
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>   
+    <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>    
+
+    <!--  header section for login-->
+<!--  -->
+</head>
+
+<body>
+
+	<div class="page-wrapper chiller-theme toggled">
+ 		<div th:replace = "/fragments/fixedlayout :: header"></div>
+		 <div th:replace="/fragments/journalsidebar :: journalsidebar"></div>  
+		<main class="page-content">
+		<div class="container-fluid">
+			<hr>
+			
+
+			<!-- start of main body -->
+			<div class="container">
+				
+				<!-- will be included here..script of here is saved in notepad for now -->
+				<div class="row">
+				<div class="col-sm-9">
+				<div class="center">						
+<!--=========== BEGIN OUR COURSES SECTION ================-->
+    <section id="ourCourses">
+      <div class="container">
+       <!-- Our courses titile -->
+        <div class="row">
+          <div class="col-lg-12 col-md-12"> 
+            <div class="title_area">
+              <h2 class="title_two">Current Isssues</h2>
+              <span></span> 
+            </div>
+          </div>
+        </div>
+        <!-- End Our courses titile -->
+        <!-- Start Our courses content -->
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="ourCourse_content">
+              <ul class="course_nav">
+                <li>
+                  <div class="single_course">
+                    <div class="singCourse_imgarea">
+                      <img src="img/course-1.jpg" />
+                      <div class="mask">                         
+                        <a href="#" class="course_more">View Journal</a>
+                      </div>
+                    </div>
+                    <div class="singCourse_content">
+                    <h3 class="singCourse_title"><a href="#">Introduction To Matrixzzz</a></h3>
+                    <p class="singCourse_price"><span>$20</span> Per One Month</p>
+                    <p>when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                    </div>
+                  </div>
+                </li>
+               
+    
+                <li>
+                  <div class="single_course">
+                    <div class="singCourse_imgarea">
+                      <img src="img/course-1.jpg" />
+                      <div class="mask">                         
+                        <a href="#" class="course_more">View Journal</a>
+                      </div>
+                    </div>
+                    <div class="singCourse_content">
+                    <h3 class="singCourse_title"><a href="#">Introduction To Matrix</a></h3>
+                    <p class="singCourse_price"><span>$20</span> Per One Month</p>
+                    <p>when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                    </div>s
+                  </div>
+                </li> 
+                
+                 <li>
+                  <div class="single_course">
+                    <div class="singCourse_imgarea">
+                      <img src="img/course-1.jpg" />
+                      <div class="mask">                         
+                        <a href="#" class="course_more">View Journal</a>
+                      </div>
+                    </div>
+                    <div class="singCourse_content">
+                    <h3 class="singCourse_title"><span>Title</span></h3>
+                    <p class="singCourse_price">Published Date: <span >2019.2.12</span></p>
+                    
+                    </div>
+                  </div>
+                </li> 
+                
+                 <li>
+                  <div class="single_course">
+                    <div class="singCourse_imgarea">
+                      <img src="img/course-1.jpg" />
+                      <div class="mask">                         
+                        <a href="#" class="course_more">View Journal</a>
+                      </div>
+                    </div>
+                    <div class="singCourse_content">
+                    <h3 class="singCourse_title"><a href="#">Introduction To Matrix</a></h3>
+                    <p class="singCourse_price"><span>$20</span> Per One Month</p>
+                    <p>when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                    </div>s
+                  </div>
+                </li> 
+                           
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- End Our courses content -->
+				</div>
+				</div>
+				</div>
+				<!--main part end  -->
+			</div>
+			<!-- end of main body -->
+
+		</div>
+		</main>
+		<!-- page-content" -->
+	</div>
+	
+	
+	<!-- page-wrapper -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+</body>
+
+
+</html>

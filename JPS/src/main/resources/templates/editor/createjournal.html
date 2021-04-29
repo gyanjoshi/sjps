@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta>
+<title>Create New Journal</title>
+
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ghodaghodi multiple campus Sukkhad, Kailai - Research Journal">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <link th:href="@{/adminstatic/css/admin.css}" rel="stylesheet">
+ <script th:src="@{/adminstatic/js/admin.js}"></script>
+ 
+</head>
+
+<body>
+<div th:replace="fragments/headerlayout :: header"></div>
+<div class="page-wrapper chiller-theme toggled">
+ <div th:replace = "/editor/editorpage :: sidebar"></div>
+ <main class="page-content">
+    <div class="container-fluid">
+      <hr />
+      
+       	<section class="section">
+		<div class="container">
+			<h4 class="title">Create New Journal</h4>			
+		</div>
+		</section>
+      
+      <!-- start of main body -->
+     <div class="container">
+		<div class="columns">
+			<div class="column is-full">
+				<div class="box">
+					<form th:action="@{/editor/createjournal}" method="POST" enctype="multipart/form-data">
+						
+						<div class="form-group">
+							<label class="label is-small">Journal title</label>
+							<div class="col-sm-10">
+								<input class="form-control" id="title" name="title" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="label is-small">Journal Cover Page (Upload .JPG)</label>
+							<div class="col-sm-10">
+								<input type="file" class="form-control" id="coverPage" name="coverPage" />
+							</div>
+						</div>						
+						
+						<div class="field is-grouped">
+							<div class="col-sm-10">
+								<button class="button is-success is-small">Submit</button>
+							</div>
+							<div class="col-sm-10">
+								<a th:href="@{/editor}" class="button is-danger is-small">Cancel</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+      <!-- end of main body -->
+   </div>   
+
+  </main>
+</div>
+</body>
+</html> 

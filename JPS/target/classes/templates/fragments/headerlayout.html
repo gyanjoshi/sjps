@@ -1,0 +1,443 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+.nav-item:hover {
+    color: white;
+}
+</style>
+</head>
+<body>
+<div th:fragment="header">
+	<header id="header">
+		<div class="container-fluid">
+			<div class="row">
+				<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #047E96;">
+					<div class="container-fluid">
+						<ul class="navbar-nav">
+							<!-- Navbar content -->
+							<li class="nav-item"><a class="nav-link"
+								data-toggle="tooltip" data-placement="top" title="Facebook"
+								href="#"><i class="fa fa-facebook fa-2x"></i></a></li>
+							<li class="nav-item"><a class="nav-link"
+								data-toggle="tooltip" data-placement="top" title="Linkedin"
+								href="#"><i class="fa fa-linkedin fa-2x"></i></a></li>
+							<li class="nav-item"><a class="nav-link"
+								data-toggle="tooltip" data-placement="top" title="Youtube"
+								href="#"><i class="fa fa-youtube fa-2x"></i></a></li>
+						</ul>
+						<div class="btn-group dropleft">							
+							<a	class="btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							    <i class="fa fa-user-circle-o fa-2x" aria-hidden="true" style="color: #37c6f5;"></i>
+							    </a>
+								
+							  	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item"
+										th:href="@{/admin}">Admin Panel</a></li>
+									<li sec:authorize="hasRole('ROLE_EDITOR')"><a class="dropdown-item"
+										th:href="@{/editor}">Editor Panel</a></li>
+									<li sec:authorize="hasRole('ROLE_AUTHOR')"><a class="dropdown-item"
+										th:href="@{/author}">Author Dashboard</a></li>
+									<li th:if="${#authorization.expression('isAuthenticated()')}">
+										<a class="dropdown-item" th:href="@{/logout}">Logout</a>
+									</li>
+									<li
+										th:if="${#authorization.expression('not isAuthenticated()')}">
+										<a class="dropdown-item" th:href="@{/login}" >Login</a>
+									</li>
+									<li
+										th:if="${#authorization.expression('not isAuthenticated()')}">
+										<a class="dropdown-item" h:href="@{/register}" >Register</a>
+									</li>
+								</ul>
+								
+						</div>
+
+					</div>
+				</nav>
+			</div>
+			<div class="row menu_area">
+				<nav class="navbar navbar-default navbar-expand-lg navbar-light"
+					style="background-color: #047E96;">
+					<div class="container-fluid">
+						<div class="navbar-header">
+						<a class="navbar-brand" th:href="@{/}">GhodaGhodi Campus <span>Research Management cell</span></a>  
+						<button class="navbar-toggler" type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbar1"
+							aria-controls="navbar1" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						</div>
+						<div id="navbar1" class="collapse navbar-collapse">
+							<ul id="top-menu" class="nav navbar-nav navbar-right main-nav me-auto mb-2 mb-lg-0">
+								<li class="nav-item"><a class="nav-link active"
+									aria-current="page" th:href="@{/}">Home</a></li>
+
+								<li class="nav-item dropdown">
+								<a	class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										About Us </a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<li><a class="dropdown-item" th:href="@{/aboutus}">About
+												Us</a></li>
+										<li><a class="dropdown-item" th:href="@{/editorboard}"
+											id="oureditors">Editorial Board</a></li>
+										<li><a class="dropdown-item" th:href="@{contact}">Contact</a></li>
+									</ul></li>
+								<li class="nav-item"><a class="nav-link"
+									th:href="@{/alljournals}">Archives</a></li>
+								<li class="nav-item"><a class="nav-link"
+									th:href="@{/guidelines}">Author Guidelines</a></li>
+
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+</header>
+</div>
+
+<div th:fragment="newheader">
+<header id="sj-header" class="sj-header sj-haslayout">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+							<div class="sj-topbar">
+								<ul class="sj-socialicons sj-socialiconssimple">
+									<li class="sj-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook-f"></i></a></li>
+									<li class="sj-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+									<li class="sj-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
+									<li class="sj-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+								</ul>
+								<div class="sj-languagelogin">
+									<div class="sj-loginarea">
+										<ul class="sj-loging">
+											<li	th:if="${#authorization.expression('not isAuthenticated()')}">
+										<a th:href="@{/login}" >Login/Register</a>
+									</li>
+									</ul>
+									</div>
+									<div class="sj-userloginarea" th:if="${#authorization.expression('isAuthenticated()')}">
+										
+										<a href="javascript:void(0);">
+											<i class="fa fa-angle-down"></i>
+											<img th:if="*{currentProfile != null}"  th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(currentProfile)}}" alt="Profile picture" />
+											
+											<div class="sj-loginusername">
+												<h3>Hi, </h3><h3 th:text ="${#authentication.getName()}"></h3>
+												<span sec:authorize="hasRole('ROLE_AUTHOR')">Author</span>
+												<span sec:authorize="hasRole('ROLE_ADMIN')">Admin</span>
+												<span sec:authorize="hasRole('ROLE_EDITOR')">Editor</span>
+											</div>
+										</a>
+										<nav class="sj-usernav">
+											<ul>
+												<li sec:authorize="hasRole('ROLE_ADMIN')">
+													<a th:href="@{/admin}">Admin Dashboard</a>
+												</li>
+												<li sec:authorize="hasRole('ROLE_EDITOR')">
+													<a th:href="@{/editor}">Editor Dashboard</a>
+												</li>
+												<li sec:authorize="hasRole('ROLE_AUTHOR')">
+												<a th:href="@{/author}">Author Dashboard</a>
+												</li>
+												<li th:if="${#authorization.expression('isAuthenticated()')}">
+												<a th:href="@{/logout}">Logout</a>
+												</li>
+											</ul>
+										</nav>
+									</div>									
+								</div>
+							</div>
+							<div class="sj-navigationarea">
+							
+							<strong class="sj-logo">
+										<a th:href="@{/}"><img th:src="@{/img/logo-gmc.png}" alt="image description"></a>
+							</strong>						
+								
+								<div class="sj-rightarea">
+									<nav id="sj-nav" class="sj-nav navbar-expand-lg">
+										<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+											<i class="lnr lnr-menu"></i>
+										</button>
+										<div class="collapse navbar-collapse sj-navigation" id="navbarNav">
+											<ul>
+												<li class="current-menu-item">
+													<a aria-current="page" th:href="@{/}">Home</a>
+												</li>	
+												
+												
+												<li class="menu-item-has-children page_item_has_children"><span class="sj-dropdowarrow"><i class="fa fa-angle-down"></i></span>
+													<a href="#">About Us</a>
+													<ul class="sub-menu">
+														<li><a th:href="@{/aboutus}">Who we are</a></li>
+														<li><a th:href="@{/editorboard}" id="oureditors">Editorial Board</a></li>
+														<li><a th:href="@{/contact}">Contact</a></li>
+														
+													</ul>
+												</li>
+												<li class="menu-item">
+													<a aria-current="page" th:href="@{/announcements}">Announcements</a>
+												</li>
+												<li class="menu-item-has-children page_item_has_children"><span class="sj-dropdowarrow"><i class="fa fa-angle-down"></i></span>
+													<a href="javascript:void(0);">Issues</a>
+													<ul class="sub-menu">
+														<li><span class="sj-tagnew">New</span>
+															<a th:href="@{/currentissue}">Current Issue</a></li>
+														<li><a th:href="@{/allissues}">All Issues</a></li>
+														<li><a th:href="@{/author/submitarticle}">Submit Article</a></li>
+													</ul>
+												</li>
+												
+												<li class="menu-item-has-children page_item_has_children"><span class="sj-dropdowarrow"><i class="fa fa-angle-down"></i></span>
+													<a href="javascript:void(0);">Resources</a>
+													<ul class="sub-menu">
+														<!-- <li><a th:href="@{/guidelines}">Author Guideline</a></li>
+														<li><a th:href="@{/ethics}">Publication Ethics</a></li>
+														<li><a th:href="@{/flowchart}">Article Processing Flowchart</a></li> -->
+														<li><a th:href="@{/downloads}">Downloads</a></li>
+													</ul>
+												</li>												
+											</ul>
+										</div>
+									</nav>
+									<a class="sj-btntopsearch" href="#sj-searcharea"><i class="lnr lnr-magnifier"></i></a>
+									<a class="sj-btn sj-btnactive" th:href="@{/author/submitarticle}">Submit Your Article</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+</div>
+	
+<div th:fragment="footer">
+	<footer id="sj-footer" class="sj-footer sj-haslayout">
+				<div class="container">
+					<div class="row">
+						<a class="sj-btnscrolltotop" href="javascript:void(0);"><i class="fa fa-angle-up"></i></a>
+						<div class="sj-footercolumns">
+							<div class="col-12 col-sm-6 col-md-6 col-lg-3 float-left">
+								<div class="sj-fcol sj-footeraboutus">
+									<strong class="sj-logo">
+										<a href="index.html"><img th:src="@{/img/logo-gmc.png}" alt="image description"></a>
+									</strong>
+									<div class="sj-description">
+										<!-- <p th:utext="${#strings.abbreviate(page.html,150)}"></p>  -->
+                						<p ><a th:href="@{/aboutus}">Read more</a></p>
+										
+									</div>
+									<ul class="sj-socialicons sj-socialiconssimple">
+										
+										<li class="sj-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook-f"></i></a></li>
+										<li class="sj-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+										<li class="sj-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
+										<li class="sj-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+										<li class="sj-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6 col-md-6 col-lg-3 float-left">
+								<div class="sj-fcol sj-widget sj-widgetresources">
+									<div class="sj-widgetheading">
+										<h3>Resources</h3>
+									</div>
+									<div class="sj-widgetcontent">
+										<ul>
+											<li><a href="javascript:void(0);">Authors</a></li>
+											<li><a href="javascript:void(0);">Librarians</a></li>
+											<li><a href="javascript:void(0);">Reviewers</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6 col-md-6 col-lg-3 float-left">
+								<div class="sj-fcol sj-widget sj-widgetcontactus">
+									<div class="sj-widgetheading">
+										<h3>Get In Touch</h3>
+									</div>
+									<div class="sj-widgetcontent">
+										<ul>
+											<li><i class="lnr lnr-home"></i><address>Research Management Cell, Ghodaghodi Multiple Campus, Kailali Nepal</address></li>
+											<li><p>Cell Coordinator: Dipak Raj Joshi</p></li>
+											<li><a href="tel:(+977)9848427754"><i class="lnr lnr-screen"></i><span>(+977) 9848427754</span></a></li>
+											<li><a href="mailto:***REMOVED***"><i class="lnr lnr-envelope"></i><span>***REMOVED***</span></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-sm-6 col-md-6 col-lg-3 float-left">
+								<div class="sj-fcol sj-widget sj-widgetresources">
+									<div class="sj-widgetheading">
+										<h3>Important links</h3>
+									</div>
+									<div class="sj-widgetcontent">
+										<ul>
+											<li><a href="http://www.ghodaghodicampus.edu.np/" target="_blank">Ghodaghodi Multiple Campus</a></li>
+						                  <li><a href="https://tribhuvan-university.edu.np/" target="_blank">Tribhuwan University</a></li>
+						                  <li><a href="http://www.ugcnepal.edu.np/" target="_blank">University Grant Commission</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+						
+						<div class="sj-footerbottom">
+							<p class="sj-copyrights">© 2021 <span>Ghodaghodi Multiple Campus, Kailali Nepal</span>. All Rights Reserved</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+			</div>
+
+<aside id="sj-asidebar" class="sj-asidebar sj-widgetbox" th:fragment="authorsidebar">
+	<div class="sj-widgetprofile">
+		<div class="sj-widgetcontent">
+			<figure>												
+				<img th:if="*{currentProfile != null}"  th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(currentProfile)}}" alt="Profile picture"/>
+				<a class="sj-btnedite" th:href="@{/author/changeprofilepicture}"><i class="lnr lnr-pencil"></i></a>
+			</figure>
+			<div class="sj-admininfo">
+				<h3 th:text ="${#authentication.getName()}"></h3>
+				<h4>Author</h4>
+			</div>
+		</div>
+	</div>
+	<div class="sj-widgetdashboard">
+		<nav id="sj-dashboardnav" class="sj-dashboardnav">
+			<ul>
+				<li><a th:href="@{/author/pending}"><i class="lnr lnr-sync"></i> <span>Articles Under Review</span></a></li>
+				<li><a th:href="@{/author/published}"><i class="lnr lnr-sync"></i> <span>My Published Articles</span></a></li>												
+				<li id="acctsetting" class="has-submenu collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapsesetting" aria-controls="collapsesetting">
+			        <a href="javascript:void(0)"><i class="lnr lnr-lock"></i>
+			        	<span>Account Setting</span>
+			        </a>
+		        <div id="collapsesetting" data-parent="#accordion" aria-labelledby="acctsetting" class="sidebar-submenu collapse">
+		        	
+		        	<ul>
+			        	<li><a th:href="@{/author/editprofile}"><i class="fa fa-edit"></i></i> <span>Edit Profile</span></a></li>
+						<li><a th:href="@{/author/changepassword}"><i class="fa fa-key" aria-hidden="true"></i><span>Change Password</span></a></li>
+						<li><a th:href="@{/author/changeprofilepicture}"><i class="fa fa-camera"></i> <span>Change Profile Picture</span></a></li>
+					</ul>
+					
+			    </div>
+			    </li> 
+				<li><a th:href="@{/logout}"><i class="fa fa-power-off"></i><span>Logout</span></a></li>
+			</ul>
+		</nav>
+	</div>
+</aside>
+<!-- Editor Side bar -->
+
+<aside id="sj-asidebar" class="sj-asidebar sj-widgetbox" th:fragment="editorsidebar">
+	<div class="sj-widgetprofile">
+		<div class="sj-widgetcontent">
+			<figure>												
+				<img th:if="*{currentProfile != null}"  th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(currentProfile)}}" alt="Profile picture"/>
+				<a class="sj-btnedite" th:href="@{/editor/changeprofilepicture}"><i class="lnr lnr-pencil"></i></a>
+			</figure>
+			<div class="sj-admininfo">
+				<h3 th:text ="${#authentication.getName()}"></h3>
+				<h4>Editor</h4>
+			</div>
+		</div>
+	</div>
+	<div class="sj-widgetdashboard">
+		<nav id="sj-dashboardnav" class="sj-dashboardnav">
+			<ul id="accordion">
+				<li><a th:href="@{/editor/submissions}"><span>Submissions</span></a></li>
+				<li><a th:href="@{/editor/issues}"><span>Issues</span></a></li>
+				<li><a th:href="@{/editor/announcements}"><span>Announcements</span></a></li>
+                <li><a th:href="@{/editor/editors}"><span>Editors</span></a></li>
+                <li id="othersetting" class="has-submenu collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapseothersetting" aria-controls="collapseothersetting">
+			        <a href="javascript:void(0)"><i class="fa fa-cogs"></i>
+			        	<span>Other Setting</span>
+			        </a>
+		        <div id="collapseothersetting" data-parent="#accordion" aria-labelledby="othersetting" class="sidebar-submenu collapse">
+		        	
+		        	<ul>
+			        	<li><a th:href="@{/editor/categories}"><i class="fa fa-edit"></i></i> <span>Article Categories</span></a></li>
+						<li><a th:href="@{/editor/sections}"><i class="fa fa-puzzle-piece" aria-hidden="true"></i><span>Journal Sections</span></a></li>
+						
+					</ul>
+					
+			    </div>
+			    </li>
+		        <li id="acctsetting" class="has-submenu collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapsesetting" aria-controls="collapsesetting">
+			        <a href="javascript:void(0)"><i class="lnr lnr-lock"></i>
+			        	<span>Account Setting</span>
+			        </a>
+		        <div id="collapsesetting" data-parent="#accordion" aria-labelledby="acctsetting" class="sidebar-submenu collapse">
+		        	
+		        	<ul>
+			        	<li><a th:href="@{/editor/editprofile}"><i class="fa fa-edit"></i></i> <span>Edit Profile</span></a></li>
+						<li><a th:href="@{/editor/changepassword}"><i class="fa fa-key" aria-hidden="true"></i><span>Change Password</span></a></li>
+						<li><a th:href="@{/editor/changeprofilepicture}"><i class="fa fa-camera"></i> <span>Change Profile Picture</span></a></li>
+					</ul>
+					
+			    </div>
+			    </li> 	            	
+		        		        
+				<li><a th:href="@{/editor/journalsetting}"><i class="fa fa-tasks"></i><span>Journal Setting</span></a></li>
+           		<li><a th:href="@{/logout}"><i class="fa fa-power-off"></i><span>Logout</span></a></li>				
+			</ul>
+			
+		</nav>
+	</div>
+</aside>
+
+<!-- Admin Side bar -->
+
+<aside id="sj-asidebar" class="sj-asidebar sj-widgetbox" th:fragment="adminsidebar">
+	<div class="sj-widgetprofile">
+		<div class="sj-widgetcontent">
+			<figure>												
+				<img th:if="*{currentProfile != null}"  th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(currentProfile)}}" alt="Profile picture"/>
+				<a class="sj-btnedite" th:href="@{/admin/changeprofilepicture}"><i class="lnr lnr-pencil"></i></a>
+			</figure>
+			<div class="sj-admininfo">
+				<h3 th:text ="${#authentication.getName()}"></h3>
+				<h4>Editor</h4>
+			</div>
+		</div>
+	</div>
+	<div class="sj-widgetdashboard">
+		<nav id="sj-dashboardnav" class="sj-dashboardnav">
+			<ul id="accordion">
+				
+				<li><a th:href="@{/admin/pages}"><span>Pages</span></a></li>
+				<li><a th:href="@{/admin/notices}"><span>Notices</span></a></li>
+          		<li><a th:href="@{/admin/downloads}"><span>Downloads</span></a></li>
+                <li><a th:href="@{/admin/user}"><span>Users</span></a></li>
+                <li><a th:href="@{/admin/downloadlog}"><span>Download Application Log</span></a></li>
+                
+		        <li id="acctsetting" class="has-submenu collapsed" data-toggle="collapse" aria-expanded="false" data-target="#collapsesetting" aria-controls="collapsesetting">
+			        <a href="javascript:void(0)"><i class="lnr lnr-lock"></i>
+			        	<span>Account Setting</span>
+			        </a>
+		        <div id="collapsesetting" data-parent="#accordion" aria-labelledby="acctsetting" class="sidebar-submenu collapse">
+		        	
+		        	<ul>
+			        	<li><a th:href="@{/admin/editprofile}"><i class="fa fa-edit"></i></i> <span>Edit Profile</span></a></li>
+						<li><a th:href="@{/admin/changepassword}"><i class="fa fa-key" aria-hidden="true"></i><span>Change Password</span></a></li>
+						<li><a th:href="@{/admin/changeprofilepicture}"><i class="fa fa-camera"></i> <span>Change Profile Picture</span></a></li>
+					</ul>
+					
+			    </div>
+			    </li>         	
+		        		        
+				
+           		<li><a th:href="@{/logout}"><i class="fa fa-power-off"></i><span>Logout</span></a></li>				
+			</ul>
+			
+		</nav>
+	</div>
+</aside>
+</body>
+</html>
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ghodaghodi multiple campus Sukkhad, Kailai - Research Journal">
+   	
+    <title>Articles approved for publishing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <link th:href="@{/adminstatic/css/admin.css}" rel="stylesheet">
+ <script th:src="@{/adminstatic/js/admin.js}"></script>
+
+</head>
+
+<body>
+<div th:replace="fragments/headerlayout :: header"></div>
+<div class="page-wrapper chiller-theme toggled">
+
+<div th:replace = "/editor/editorpage :: sidebar"></div>
+ 
+  <main class="page-content">
+    <div class="container-fluid">
+      <hr>
+       <div class = "row">
+      <div class="container">
+			<h5 class="title">Approved Articles</h5>
+			
+		</div>
+      
+      </div> 
+      
+      <!-- start of main body -->
+      <div class="container">
+		<div class="columns">
+			<div class="column is-full">
+				<table th:if="*{approved != null}" class="table content is-small is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Author Name</th>
+							<th>Address</th>
+							<th>City</th>
+							<th>E-mail</th>
+							<th>Journal</th>
+							<th>Issue</th>
+							<th>status</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="article : ${approved}">							
+							<td th:text="${article.topic}"></td>
+							<td th:text="${article.authorName}"></td>
+							<td th:text="${article.address}"></td>
+							<td th:text="${article.city}"></td>
+							<td th:text="${article.email}"></td>
+							<td th:text="${article.status}"></td>					
+							
+							<td>
+								<a th:href="@{/download(type='article',file=${article.fileName})}"  class="button is-primary is-small">Download</a>
+								<a th:href="@{/editor/edit-approve(article=${article.articleId},author=${article.authorId})}"  class="button is-primary is-small">Edit</a>
+							</td>
+								 
+
+						</tr>
+					</tbody> 
+				</table>
+			</div>
+		</div>
+	</div>
+      <!-- end of main body -->
+      
+
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    
+</body>
+
+</html>

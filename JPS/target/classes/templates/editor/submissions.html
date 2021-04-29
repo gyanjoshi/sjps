@@ -1,0 +1,1192 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+<!-- Basic Page Needs
+    ================================================== -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Ghodaghodi Campus - Research Department</title>
+
+<!-- Mobile Specific Metas
+    ================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/icon"
+	th:href="@{/img/logo-gmc.png}" />
+
+
+
+<!-- CSS
+    ================================================== -->
+
+<!-- Google fonts -->
+<link href='http://fonts.googleapis.com/css?family=Merriweather'
+	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Varela'
+	rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/normalize.css}">
+<link rel="stylesheet" th:href="@{/css/fontawesome-all.css}">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+<link rel="stylesheet" th:href="@{/css/scrollbar.css}">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/css/chartist.css}">
+<link th:href="@{/main.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/dashboard.css}">
+<link rel="stylesheet" th:href="@{/css/color.css}">
+<link rel="stylesheet" th:href="@{/css/transitions.css}">
+
+<link rel="stylesheet" th:href="@{/css/responsive.css}">
+
+<!-- Latest compiled and minified CSS -->
+<link defer rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta/dist/css/bootstrap-select.min.css">
+
+<link th:href="@{/css/pagination.css}" rel="stylesheet" type="text/css">
+
+
+
+<script th:src="@{/js/modernizr-2.8.3-respond-1.4.2.min.js}"
+	type="text/javascript"></script>
+
+<script type="text/javascript" th:src="@{/ckeditor/ckeditor.js}"></script>
+
+
+
+
+</head>
+<body class="sj-home">
+	<!--************************************
+				Preloader Start
+	*************************************-->
+	<div class="preloader-outer">
+		<div class='loader'>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+		</div>
+	</div>
+	<!--************************************
+				Preloader End
+	*************************************-->
+	<div id="sj-wrapper" class="sj-wrapper">
+		<div class="sj-contentwrapper">
+
+			<!--=========== BEGIN HEADER SECTION ================-->
+
+
+			<div th:replace="/fragments/headerlayout :: newheader"></div>
+
+
+			<!--   =========== END HEADER SECTION ================-->
+
+			<div class="sj-innerbanner">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="sj-innerbannercontent">
+								<h1>Editor Dashboard</h1>
+								<ol class="sj-breadcrumb">
+									<li><a href="javascript:void(0);">Home</a></li>
+									<li><a href="javascript:void(0);">Submissions</a></li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<main id="sj-main" class="sj-main sj-haslayout sj-sectionspace">
+			<div class="container">
+				<div class="row">
+					<div id="sj-twocolumns" class="sj-twocolumns">
+						<div
+							class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3 float-left">
+							<div th:replace="/fragments/headerlayout :: editorsidebar"></div>
+						</div>
+						<div
+							class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9 float-right">
+
+							<div id="sj-content" class="sj-content sj-addarticleholdcontent">
+								<div class="sj-dashboardboxtitle">
+									<h2>Submissions</h2>
+
+								</div>
+								<div class="sj-addarticlehold">
+									<p class="alert alert-success" th:if="${message}" th:text="${message}" />
+									<p class="alert alert-danger" th:if="${errormessage}" th:text="${errormessage}" />
+									<p class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}" />
+										
+									<ul class="nav nav-tabs" id="myTab" role="tablist">
+										<li class="nav-item" style="list-style: inherit"><a
+											class="nav-link active" id="myqueue-tab" data-toggle="tab"
+											href="#myqueue" role="tab" aria-controls="myqueue"
+											aria-selected="true">My Queue <span th:if="${assignedtome.size()>0}" th:text="${assignedtome.size()}"
+												class="badge badge-danger"></span></a></li>
+										<li class="nav-item" style="list-style: inherit"><a
+											class="nav-link" id="unassigned-tab" data-toggle="tab"
+											href="#unassigned" role="tab" aria-controls="unassigned"
+											aria-selected="false">Unassigned <span th:if="${unassigned.size()>0}" th:text="${unassigned.size()}"
+												class="badge badge-warning"></span></a></li>
+										<li class="nav-item" style="list-style: inherit"><a
+											class="nav-link" id="allactive-tab" data-toggle="tab"
+											href="#allactive" role="tab" aria-controls="allactive"
+											aria-selected="false">All Active <span th:if="${underreview.size()>0}" th:text="${underreview.size()}"
+												class="badge badge-primary"></span></a></li>
+										<li class="nav-item" style="list-style: inherit"><a
+											class="nav-link" id="allapproved-tab" data-toggle="tab"
+											href="#allapproved" role="tab" aria-controls="allapproved"
+											aria-selected="false">Approved<span th:if="${approved.size()>0}" th:text="${approved.size()}"
+												class="badge badge-primary"></span></a></li>
+										<li class="nav-item" style="list-style: inherit"><a
+											class="nav-link" id="allscheduled-tab" data-toggle="tab"
+											href="#allscheduled" role="tab" aria-controls="allscheduled"
+											aria-selected="false">Scheduled<span th:if="${scheduled.size()>0}" th:text="${scheduled.size()}"
+												class="badge badge-primary"></span></a></li>
+												
+										<li class="nav-item" style="list-style: inherit"><a
+											class="nav-link" id="archive-tab" data-toggle="tab"
+											href="#archive" role="tab" aria-controls="archive"
+											aria-selected="false">Archived</a></li>
+									</ul>
+									<div class="tab-content" id="myTabContent">
+										<div class="tab-pane fade show active" id="myqueue"	role="tabpanel" aria-labelledby="myqueue-tab">
+											<th:block th:if="${assignedtome.size()>0}">
+											<div class="sj-dashboardboxtitle sj-titlewithform">
+												<h2>Articles assigned to me</h2>
+												<form class="sj-formtheme sj-formsearchvtwo" action="">
+													<div class="sj-sortupdown">
+														<a href="javascript:void(0);"><i
+															class="fa fa-sort-amount-up"></i></a>
+													</div>
+													<fieldset>
+														<input type="search" name="search" class="form-control"
+															placeholder="Search here">
+														<button type="submit" class="sj-btnsearch">
+															<i class="lnr lnr-magnifier"></i>
+														</button>
+													</fieldset>
+												</form>
+											</div>
+											<ul id="accordion-me"	class="sj-articledetails sj-articledetailsvtwo">
+												<th:block th:each="article, articleStat : ${assignedtome}">
+													<li th:id="${'heading-me-'+articleStat.index}"
+														class="sj-articleheader collapsed" data-toggle="collapse"
+														th:attr="data-target=${'#collapse-me-'+articleStat.index}, aria-controls=${'collapse-me-'+articleStat.index}"
+														aria-expanded="false">
+														<div class="sj-detailstime">
+															<h4 th:text="${article.topic}"></h4>
+															<span th:utext="${'Authors: <strong>'+article.allAuthorsName+'</strong>'}">
+																<i class="ti-bookmark"></i>
+															</span>
+															<span th:text="${'Submitted on: '+ #dates.format(article.uploadDate, 'MMM dd, yyyy HH:mm')}">
+																<i class="ti-calendar"></i>
+															</span> 
+															<span th:text="${'Status: '+article.status}">
+																<i class="ti-bookmark"></i>
+															</span>
+															<span th:text="${'Reviewers: '+article.reviewers}">
+																<i class="ti-layers"></i>
+															</span>
+															<span th:text="${'Categories: '+article.categories}">
+																<i class="ti-layers"></i>
+															</span>						
+															
+														</div>
+
+													</li>
+													<li th:id="${'collapse-me-'+articleStat.index}"
+														class="sj-active sj-userinfohold collapse"
+														th:attr="aria-labelledby=${'heading-me-'+articleStat.index}"
+														data-parent="#accordion-me" style="">
+														<div class="sj-userinfoimgname">
+															
+															<div class="sj-userinfoname">
+
+																<span
+																	th:text="${T(com.example.projectx.utils.DateTimeUtils).getPrettyDate(article.uploadDate)}">(time
+																	ago)</span>
+																<h3
+																	th:text="${article.authorName+', '+article.otherAuthors}"></h3>
+															</div>
+															<div class="sj-userbtnarea">																
+																							
+																<button type="submit" class="sj-btn mb-3" data-toggle="modal" th:attr="data-target=${'#feedbackmodal-'+articleStat.index}">Send Feedback</button>
+																<button type="submit" class="sj-btn mb-3" data-toggle="modal" th:attr="data-target=${'#rejectmodal-'+articleStat.index}">Reject</button>
+																<a type="button" th:href="@{/editor/approve(article=${article.articleId})}"  class="sj-btn sj-btnactive mb-3">Approve Article</a>
+																<a type="button" th:href="@{/editor/update-info(article=${article.articleId})}"  class="sj-btn sj-btnactive mb-3">Update Article</a>
+															 
+															<div class="sj-downloadheader">
+																<div class="sj-title">
+																	<h3>Attached Document</h3>
+																	<a
+																		th:href="@{/download(type='article',file=${article.fileName})}"><i
+																		class="lnr lnr-download"></i>Download</a>
+
+																</div>
+																<div class="sj-docdetails">
+																	<figure class="sj-docimg">
+																		<img th:src="@{/img/doc-img.jpg}"
+																			alt="img description" src="">
+																	</figure>
+																	<div class="sj-docdescription">
+																		<h4 th:text="${'Document '+article.fileName}"></h4>
+																		<!-- <span>File Size 500kb</span> -->
+																	</div>
+																</div>
+															</div>
+														</div>
+														</div>
+													</li>
+												</th:block>												
+											</ul>
+											<nav id="submission-page-me" class="mt-3 float-right">
+											</nav>
+										</div>
+										<div class="tab-pane fade" id="unassigned" role="tabpanel" aria-labelledby="unassigned-tab">
+											<th:block th:if="${unassigned.size()>0}">
+											<div class="sj-dashboardboxtitle sj-titlewithform">
+												<h2>Unassigned Articles</h2>
+												<form class="sj-formtheme sj-formsearchvtwo" action="">
+													<div class="sj-sortupdown">
+														<a href="javascript:void(0);"><i
+															class="fa fa-sort-amount-up"></i></a>
+													</div>
+													<fieldset>
+														<input type="search" name="search" class="form-control"
+															placeholder="Search here">
+														<button type="submit" class="sj-btnsearch">
+															<i class="lnr lnr-magnifier"></i>
+														</button>
+													</fieldset>
+												</form>
+											</div>											
+											<ul id="accordion-unassigned" class="sj-articledetails sj-articledetailsvtwo">
+												<th:block th:each="article, articleStat : ${unassigned}">
+													<li th:id="${'heading-unassigned-'+articleStat.index}"
+														class="sj-articleheader collapsed" data-toggle="collapse"
+														th:attr="data-target=${'#collapse-unassigned-'+articleStat.index}, aria-controls=${'collapse-unassigned-'+articleStat.index}"
+														aria-expanded="false">
+														<div class="sj-detailstime">
+															<h4 th:text="${article.topic}"></h4>
+															<span th:utext="${'Authors: <strong>'+article.allAuthorsName+'</strong>'}">
+																<i class="ti-bookmark"></i>
+															</span>
+															<span th:text="${'Submitted on: '+ #dates.format(article.uploadDate, 'MMM dd, yyyy HH:mm')}">
+																<i class="ti-calendar"></i>
+															</span> 
+															<span th:text="${'Status: '+article.status}">
+																<i class="ti-bookmark"></i>
+															</span>
+															
+															<span th:text="${'Categories: '+article.categories}">
+																<i class="ti-layers"></i>
+															</span>						
+															
+														</div>
+
+													</li>
+													<li th:id="${'collapse-unassigned-'+articleStat.index}"
+														class="sj-active sj-userinfohold collapse"
+														th:attr="aria-labelledby=${'heading-unassigned-'+articleStat.index}"
+														data-parent="#accordion-unassigned-" style="">
+														<div class="sj-userinfoimgname">
+															
+															<div class="sj-userinfoname">
+
+																<span
+																	th:text="${T(com.example.projectx.utils.DateTimeUtils).getPrettyDate(article.uploadDate)}">(time
+																	ago)</span>
+																<h3
+																	th:text="${article.authorName+', '+article.otherAuthors}"></h3>
+															</div>
+															<div class="sj-userbtnarea">
+																
+																<a type="button" th:href="@{/editor/to-reviewer(article=${article.articleId},author=${article.authorId})}"  class="sj-btn sj-btnactive mb-3">Assign Reviewer</a>																
+																<a type="button" th:href="@{/editor/update-info(article=${article.articleId})}"  class="sj-btn sj-btnactive mb-3">Update Article Info</a>
+																<button type="button" class="btn btn-danger mb-3 ml-3" data-toggle="modal" th:attr="data-target='#unassigned-deleteModal'+${article.articleId}">Delete Article</button>
+																<div class="modal fade" th:id="unassigned-deleteModal+${article.articleId}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+																		<!-- The Modal -->
+																		<div class="modal-dialog" role="document"  >
+																			<div class="modal-content">
+							
+																				<!-- Modal Header -->
+																				<div class="modal-header">
+																					<h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>																					
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+																				
+																				<div class="modal-body">
+																			    	<p class="ml-5" style="color:red">It will delete article permanently from system.</p>     
+																			    </div>
+							
+																				<!-- Modal footer -->
+																				<div class="modal-footer">
+																					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																					<a th:href="@{/editor/delete-article(article=${article.articleId})}">
+																						<button type="button" class="btn btn-danger">Yes</button>
+																					</a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+															<div class="sj-downloadheader">
+																<div class="sj-title">
+																	<h3>Attached Document</h3>
+																	<a th:href="@{/download(type='article',file=${article.fileName})}"><i class="lnr lnr-download"></i>Download</a>
+																</div>
+																<div class="sj-docdetails">
+																	<figure class="sj-docimg">
+																		<img th:src="@{/img/doc-img.jpg}"
+																			alt="img description" src="">
+																	</figure>
+																	<div class="sj-docdescription">
+																		<h4 th:text="${'Document '+article.fileName}"></h4>
+																		<!-- <span>File Size 500kb</span> -->
+																	</div>
+																</div>
+															</div>
+														</div>
+														</div>
+													</li>
+												</th:block>
+											</ul>
+											<nav id="submission-page-unassigned" class="mt-3 float-right">
+											</nav>
+											</th:block>
+										</div>
+										<div class="tab-pane fade" id="allactive" role="tabpanel" aria-labelledby="allactive-tab">
+											<th:block th:if="${underreview.size()>0}">
+											<div class="sj-dashboardboxtitle sj-titlewithform">
+												<h2>Articles under review</h2>
+												<form class="sj-formtheme sj-formsearchvtwo" action="">
+													<div class="sj-sortupdown">
+														<a href="javascript:void(0);"><i
+															class="fa fa-sort-amount-up"></i></a>
+													</div>
+													<fieldset>
+														<input type="search" name="search" class="form-control"
+															placeholder="Search here">
+														<button type="submit" class="sj-btnsearch">
+															<i class="lnr lnr-magnifier"></i>
+														</button>
+													</fieldset>
+												</form>
+											</div>
+											<ul id="accordion-underreview"	class="sj-articledetails sj-articledetailsvtwo">
+												<th:block th:each="article, articleStat : ${underreview}">
+													<li th:id="${'heading-underreview'+articleStat.index}"
+														class="sj-articleheader collapsed" data-toggle="collapse"
+														th:attr="data-target=${'#collapse-underreview-'+articleStat.index}, aria-controls=${'collapse-underreview-'+articleStat.index}"
+														aria-expanded="false">
+														<div class="sj-detailstime">
+															<h4 th:text="${article.topic}"></h4>
+															<span th:utext="${'Authors: <strong>'+article.allAuthorsName+'</strong>'}">
+																<i class="ti-bookmark"></i>
+															</span>
+															<span th:text="${'Submitted on: '+ #dates.format(article.uploadDate, 'MMM dd, yyyy HH:mm')}">
+																<i class="ti-calendar"></i>
+															</span> 
+															<span th:text="${'Status: '+article.status}">
+																<i class="ti-bookmark"></i>
+															</span>
+															<span th:text="${'Reviewers: '+article.reviewers}">
+																<i class="ti-layers"></i>
+															</span>
+															<span th:text="${'Categories: '+article.categories}">
+																<i class="ti-layers"></i>
+															</span>						
+															
+														</div>
+
+													</li>
+													<li th:id="${'collapse-underreview-'+articleStat.index}"
+														class="sj-active sj-userinfohold collapse"
+														th:attr="aria-labelledby=${'heading-underreview-'+articleStat.index}"
+														data-parent="#accordion-underreview" style="">
+														<div class="sj-userinfoimgname">
+															
+															<div class="sj-userinfoname">
+
+																<span
+																	th:text="${T(com.example.projectx.utils.DateTimeUtils).getPrettyDate(article.uploadDate)}">(time
+																	ago)</span>
+																<h3	th:text="${article.authorName+', '+article.otherAuthors}"></h3>
+															</div>
+															<div class="sj-userbtnarea">
+																
+																<a type="button" th:href="@{/editor/to-reviewer(article=${article.articleId})}"  class="sj-btn sj-btnactive mb-3">Add/Modify Reviewer</a>
+																<button type="submit" class="sj-btn mb-3" data-toggle="modal" th:attr="data-target=${'#feedbackmodal-'+articleStat.index}">Send Feedback</button>
+																<button type="submit" class="sj-btn mb-3" data-toggle="modal" th:attr="data-target=${'#rejectmodal-'+articleStat.index}">Reject</button>
+																<a type="button" th:href="@{/editor/approve(article=${article.articleId})}"  class="sj-btn sj-btnactive mb-3">Approve Article</a>
+																<a type="button" th:href="@{/editor/update-info(article=${article.articleId})}"  class="sj-btn sj-btnactive mb-3">Update Article Info</a>
+																<button type="button" class="btn btn-danger mb-3 ml-3" data-toggle="modal" th:attr="data-target='#activedeleteModal'+${article.articleId}">Delete Article</button>
+																<div class="modal fade" th:id="activedeleteModal+${article.articleId}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+																		<!-- The Modal -->
+																		<div class="modal-dialog" role="document"  >
+																			<div class="modal-content">
+							
+																				<!-- Modal Header -->
+																				<div class="modal-header">
+																					<h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>																					
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+																				
+																				<div class="modal-body">
+																			    	<p class="ml-5" style="color:red">It will delete article permanently from system.</p>     
+																			    </div>
+							
+																				<!-- Modal footer -->
+																				<div class="modal-footer">
+																					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																					<a th:href="@{/editor/delete-article(article=${article.articleId})}">
+																						<button type="button" class="btn btn-danger">Yes</button>
+																					</a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																
+															 
+															<div class="sj-downloadheader">
+																<div class="sj-title">
+																	<h3>Attached Document</h3>
+																	<a
+																		th:href="@{/download(type='article',file=${article.fileName})}"><i
+																		class="lnr lnr-download"></i>Download</a>
+
+																</div>
+																<div class="sj-docdetails">
+																	<figure class="sj-docimg">
+																		<img th:src="@{/img/doc-img.jpg}"
+																			alt="img description" src="">
+																	</figure>
+																	<div class="sj-docdescription">
+																		<h4 th:text="${'Document '+article.fileName}"></h4>
+																		<!-- <span>File Size 500kb</span> -->
+																	</div>
+																</div>
+															</div>
+														</div>
+														</div>
+													</li>
+												</th:block>
+											</ul>
+											<nav id="submission-page-underreview" class="mt-3 float-right">
+											</nav>
+											</th:block>
+										</div>
+										<div class="tab-pane fade" id="allapproved" role="tabpanel" aria-labelledby="allapproved-tab">
+											<th:block th:if="${approved.size()>0}">
+											<div class="sj-dashboardboxtitle sj-titlewithform">
+												<h2>Approved Articles</h2>
+												<form class="sj-formtheme sj-formsearchvtwo" action="">
+													<div class="sj-sortupdown">
+														<a href="javascript:void(0);"><i
+															class="fa fa-sort-amount-up"></i></a>
+													</div>
+													<fieldset>
+														<input type="search" name="search" class="form-control"
+															placeholder="Search here">
+														<button type="submit" class="sj-btnsearch">
+															<i class="lnr lnr-magnifier"></i>
+														</button>
+													</fieldset>
+												</form>
+											</div>
+											<ul id="accordion-approved"	class="sj-articledetails sj-articledetailsvtwo">
+												<th:block th:each="article, articleStat : ${approved}">
+													<li th:id="${'heading-approved'+articleStat.index}"
+														class="sj-articleheader collapsed" data-toggle="collapse"
+														th:attr="data-target=${'#collapse-approved-'+articleStat.index}, aria-controls=${'collapse-approved-'+articleStat.index}"
+														aria-expanded="false">
+														<div class="sj-detailstime">
+															<h4 th:text="${article.topic}"></h4>
+															<span th:utext="${'Authors: <strong>'+article.allAuthorsName+'</strong>'}">
+																<i class="ti-bookmark"></i>
+															</span>
+															<span th:text="${'Submitted on: '+ #dates.format(article.uploadDate, 'MMM dd, yyyy HH:mm')}">
+																<i class="ti-calendar"></i>
+															</span> 
+															<span th:text="${'Status: '+article.status}">
+																<i class="ti-bookmark"></i>
+															</span>
+															<span th:text="${'Reviewers: '+article.reviewers}">
+																<i class="ti-layers"></i>
+															</span>
+															<span th:text="${'Categories: '+article.categories}">
+																<i class="ti-layers"></i>
+															</span>						
+															
+														</div>
+
+													</li>
+													<li th:id="${'collapse-approved-'+articleStat.index}"
+														class="sj-active sj-userinfohold collapse"
+														th:attr="aria-labelledby=${'heading-approved-'+articleStat.index}"
+														data-parent="#accordion-approved" style="">
+														<div class="sj-userinfoimgname">
+															<div class="sj-userinfoname">
+															  <span th:text="${T(com.example.projectx.utils.DateTimeUtils).getPrettyDate(article.uploadDate)}">(time
+																	ago)</span>
+															  <h3 th:text="${article.allAuthorsName}"></h3>
+															</div>
+															<div class="sj-userbtnarea">
+																
+																<a type="button" th:href="@{/editor/schedule-issue(article=${article.articleId})}"  class="sj-btn sj-btnactive mb-3">Schedule For Publication</a>
+																<a type="button" th:href="@{/editor/update-info(article=${article.articleId})}"  class="sj-btn sj-btnactive mb-3">Update Article Info</a>
+																<button type="button" class="btn btn-warning mb-3"
+																	data-toggle="modal" th:attr="data-target='#unapproveModal'+${article.articleId}">Unapprove Article</button>
+																<div class="modal fade" th:id="'unapproveModal'+${article.articleId}">
+																	<!-- The Modal -->
+																	<div class="modal-dialog">
+																		<div class="modal-content">
+						
+																			<!-- Modal Header -->
+																			<div class="modal-header">
+																				<h4 class="modal-title">Are you sure to Un-approve this article?</h4>
+																				<button type="button" class="close" data-dismiss="modal">&times;</button>
+																			</div>
+						
+																			<!-- Modal footer -->
+																			<div class="modal-footer">
+																				<button type="button" class="btn btn-danger"
+																					data-dismiss="modal">Close</button>
+																				<a th:href="@{/editor/unapprove(article=${article.articleId})}" >
+																					<button type="button" class="btn btn-success">Yes</button>
+																				</a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															<div class="sj-downloadheader">
+																<div class="sj-title">
+																	<h3>Attached Document</h3>
+																	<a
+																		th:href="@{/download(type='article',file=${article.fileName})}"><i
+																		class="lnr lnr-download"></i>Download</a>
+
+																</div>
+																<div class="sj-docdetails">
+																	<figure class="sj-docimg">
+																		<img th:src="@{/img/doc-img.jpg}"
+																			alt="img description" src="">
+																	</figure>
+																	<div class="sj-docdescription">
+																		<h4 th:text="${'Document '+article.fileName}"></h4>
+																		<!-- <span>File Size 500kb</span> -->
+																	</div>
+																</div>
+															</div>
+														</div>
+														</div>
+													</li>
+												</th:block>
+											</ul>
+											<nav id="submission-page-approved" class="mt-3 float-right">
+											</nav>
+											</th:block>
+										</div>
+										<div class="tab-pane fade" id="allscheduled" role="tabpanel" aria-labelledby="allscheduled-tab">
+										<th:block th:if="${scheduled.size()>0}">
+											<div class="sj-dashboardboxtitle sj-titlewithform">
+												<h2>Scheduled Articles</h2>
+												<form class="sj-formtheme sj-formsearchvtwo" action="">
+													<div class="sj-sortupdown">
+														<a href="javascript:void(0);"><i
+															class="fa fa-sort-amount-up"></i></a>
+													</div>
+													<fieldset>
+														<input type="search" name="search" class="form-control"
+															placeholder="Search here">
+														<button type="submit" class="sj-btnsearch">
+															<i class="lnr lnr-magnifier"></i>
+														</button>
+													</fieldset>
+												</form>
+											</div>
+											<ul id="accordion-scheduled"	class="sj-articledetails sj-articledetailsvtwo">
+												<th:block th:each="article, articleStat : ${scheduled}">
+													<li th:id="${'heading-scheduled'+articleStat.index}"
+														class="sj-articleheader collapsed" data-toggle="collapse"
+														th:attr="data-target=${'#collapse-scheduled-'+articleStat.index}, aria-controls=${'collapse-scheduled-'+articleStat.index}"
+														aria-expanded="false">
+														<div class="sj-detailstime">
+															<h4 th:text="${article.topic}" class="mb-2"></h4>
+															<span th:utext="${'<strong>Scheduled to publish on </strong>: '+article.getPublishInfo()}">
+																	<i class="ti-layers"></i>
+															</span>
+															<span th:utext="${'<strong>Journal Section </strong>: '+article.sectionName}">
+																<i class="ti-layers"></i>
+															</span>
+															<span th:utext="${'<strong>Order in Table of contents</strong>: '+article.tocorder}">
+																<i class="ti-layers"></i>
+															</span> 
+															<span th:text="${'Status: '+article.status}">
+																<i class="ti-bookmark"></i>
+															</span>
+														</div>
+
+													</li>
+													<li th:id="${'collapse-scheduled-'+articleStat.index}"
+														class="sj-active sj-userinfohold collapse"
+														th:attr="aria-labelledby=${'heading-scheduled-'+articleStat.index}"
+														data-parent="#accordion-scheduled" style="">
+														<div class="sj-userinfoimgname">
+															
+															<div class="sj-userinfoname">
+
+																<span th:text="${T(com.example.projectx.utils.DateTimeUtils).getPrettyDate(article.uploadDate)}">(time
+																	ago)</span>
+																<h3	class="mb-3" th:text="${article.allAuthorsName}"></h3>
+																 
+															</div>
+															<div class="sj-userbtnarea">
+																<span>
+																<Strong>Incorrectly scheduled ? </Strong>
+																<a type="button" th:href="@{/editor/schedule-issue(article=${article.articleId})}">Update</a> 
+																</span>
+																<br>
+																<th:block th:if="${article.isPDFUploaded()}">
+																<span>
+																<strong>Update PDF ?</strong>
+																<a type="button" th:href="@{/editor/uploadPDF(article=${article.articleId})}">Upload PDF</a> 
+																</span>
+																</th:block>
+																<th:block th:unless="${article.isPDFUploaded()}">
+																<span>
+																<strong style="color:red">PDF is not uploaded for this article</strong>
+																<a type="button" th:href="@{/editor/uploadPDF(article=${article.articleId})}">Upload PDF</a> 
+																</span>
+																</th:block>
+																<br>
+																<span>
+																	<strong>Update Article Info ?</strong>
+																	<a type="button" th:href="@{/editor/update-info(article=${article.articleId})}" >Update</a>
+																</span>
+																<button type="button" class="btn btn-warning mb-3  float-right"	data-toggle="modal" th:attr="data-target='#unapproveModal'+${article.articleId}">Unapprove Article</button>
+																														
+																<div class="modal fade" th:id="'unapproveModal'+${article.articleId}">
+																	<!-- The Modal -->
+																	<div class="modal-dialog">
+																		<div class="modal-content">
+						
+																			<!-- Modal Header -->
+																			<div class="modal-header">
+																				<h4 class="modal-title">Are you sure to Un-approve this article?</h4>
+																				<button type="button" class="close" data-dismiss="modal">&times;</button>
+																			</div>
+						
+																			<!-- Modal footer -->
+																			<div class="modal-footer">
+																				<button type="button" class="btn btn-danger"
+																					data-dismiss="modal">Close</button>
+																				<a th:href="@{/editor/unapprove(article=${article.articleId})}" >
+																					<button type="button" class="btn btn-success">Yes</button>
+																				</a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															<div class="sj-downloadheader">
+																<div class="sj-title">
+																	<h3>Attached Document</h3>
+																	<a th:href="@{/download(type='article',file=${article.fileName})}"><i
+																		class="lnr lnr-download"></i>Download</a>
+
+																</div>
+																<div class="sj-docdetails">
+																	<figure class="sj-docimg">
+																		<img th:src="@{/img/doc-img.jpg}"
+																			alt="img description" src="">
+																	</figure>
+																	<div class="sj-docdescription">
+																		<h4 th:text="${'Document '+article.fileName}"></h4>
+																		<!-- <span>File Size 500kb</span> -->
+																	</div>
+																</div>
+															</div>
+														</div>
+														</div>
+													</li>
+												</th:block>
+											</ul>
+											<nav id="submission-page-scheduled" class="mt-3 float-right">
+											</nav>
+											</th:block>
+										</div>
+										<div class="tab-pane fade" id="archive" role="tabpanel"	aria-labelledby="archive-tab">
+										<th:block th:if="${allarchived.size()>0}">
+											<div class="sj-dashboardboxtitle sj-titlewithform">
+												<h2>Archived Articles</h2>
+												<form class="sj-formtheme sj-formsearchvtwo" action="">
+													<div class="sj-sortupdown">
+														<a href="javascript:void(0);"><i
+															class="fa fa-sort-amount-up"></i></a>
+													</div>
+													<fieldset>
+														<input type="search" name="search" class="form-control"
+															placeholder="Search here">
+														<button type="submit" class="sj-btnsearch">
+															<i class="lnr lnr-magnifier"></i>
+														</button>
+													</fieldset>
+												</form>
+											</div>
+											<ul id="accordion-archive"	class="sj-articledetails sj-articledetailsvtwo">
+												<th:block th:each="article, articleStat : ${allarchived}">
+													<li th:id="${'heading-archive-'+articleStat.index}"
+														class="sj-articleheader collapsed" data-toggle="collapse"
+														th:attr="data-target=${'#collapse-archive-'+articleStat.index}, aria-controls=${'collapse-archive-'+articleStat.index}"
+														aria-expanded="false">
+														
+														<div class="sj-detailstime">
+															<h4 th:text="${article.topic}" class="mb-2"></h4>
+															<span th:utext="${'Authors: <strong>'+article.allAuthorsName+'</strong>'}">
+																<i	class="ti-bookmark"></i>
+															</span>
+															<th:block th:if="${article.status == 'Published'}">
+															<span th:utext="${'<strong>Published on </strong>: '+#dates.format(article.uploadDate, 'MMM dd, yyyy HH:mm')}">
+																	<i class="ti-layers"></i>
+															</span>
+															</th:block>
+															<span th:text="${'Status: '+article.status}">
+																<i	class="ti-bookmark"></i></span> 
+															
+															
+														</div>
+
+													</li>
+													<li th:id="${'collapse-archive-'+articleStat.index}"
+														class="sj-active sj-userinfohold collapse"
+														th:attr="aria-labelledby=${'heading-archive-'+articleStat.index}"
+														data-parent="#accordion-archive" style="">
+														<div class="sj-userinfoimgname">
+															
+															<div class="sj-userinfoname">
+																<span th:text="${T(com.example.projectx.utils.DateTimeUtils).getPrettyDate(article.uploadDate)}">(time
+																	ago)</span>
+																<h3	class="mb-3" th:text="${article.allAuthorsName}"></h3>
+															</div>
+															<div class="sj-userbtnarea">
+																<th:block th:if="${article.status == 'Published'}">
+																	<button type="button" data-toggle="modal" th:attr="data-target='#archiveunpublishModal'+${article.articleId}" class="sj-btn sj-btnactive mb-3">Unpublish</button>
+																	<button type="button" data-toggle="modal" th:attr="data-target='#archivefavoriteModal'+${article.articleId}" class="sj-btn sj-btnactive mb-3">Set Editor's Favorite</button>
+																	<a type="button" th:href="@{/editor/uploadPDF(article=${article.articleId})}" class="sj-btn mb-3">Update Article PDF</a>
+																	<div class="modal fade" th:id="archiveunpublishModal+${article.articleId}" tabindex="-1" role="dialog" aria-labelledby="archiveunpublishModalLabel" aria-hidden="true">
+																		<!-- The Modal -->
+																		<div class="modal-dialog" role="document"  >
+																			<div class="modal-content">
+							
+																				<!-- Modal Header -->
+																				<div class="modal-header">
+																					<h5 class="modal-title" id="archivedeleteModalLabel">Are you sure?</h5>																					
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+																				
+																				<div class="modal-body">
+																			    	<p class="ml-5" >It will Unpublish the article.</p>
+																			    	<p class="ml-5" >You can view unpublished articles in 'Scheduled' tab of submission page and republish it into other issue or same issue with some modifications.</p>     
+																			    </div>
+							
+																				<!-- Modal footer -->
+																				<div class="modal-footer">
+																					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																					<a th:href="@{/editor/unpublish(article=${article.articleId})}">																						  
+																						<button type="button" class="btn btn-primary">Yes</button>
+																					</a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<!-- Editor's Favorite -->
+																	<div class="modal fade" th:id="archivefavoriteModal+${article.articleId}" tabindex="-1" role="dialog" aria-labelledby="archivefavoriteModalLabel" aria-hidden="true">
+																		<!-- The Modal -->
+																		<div class="modal-dialog" role="document"  >
+																			<div class="modal-content">
+							
+																				<!-- Modal Header -->
+																				<div class="modal-header">
+																					<h5 class="modal-title" id="archivedeleteModalLabel">Are you sure?</h5>																					
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+																				
+																				<div class="modal-body">
+																			    	<p class="ml-5" >It will Make this article Editor's favorite the article.</p>
+																			    	<p class="ml-5" >Editor's favorite articles are displayed in home page.</p>     
+																			    </div>
+							
+																				<!-- Modal footer -->
+																				<div class="modal-footer">
+																					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																					<a th:href="@{/editor/setfavorite(article=${article.articleId})}">																						  
+																						<button type="button" class="btn btn-primary">Yes</button>
+																					</a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>																	
+																</th:block>
+																
+																<th:block th:if="${article.status != 'Published'}">
+																<button type="button" class="btn btn-danger mb-3 ml-3" data-toggle="modal" th:attr="data-target='#archivedeleteModal'+${article.articleId}">Delete Article</button>
+																<div class="modal fade" th:id="archivedeleteModal+${article.articleId}" tabindex="-1" role="dialog" aria-labelledby="archivedeleteModalLabel" aria-hidden="true">
+																		<!-- The Modal -->
+																		<div class="modal-dialog" role="document"  >
+																			<div class="modal-content">
+							
+																				<!-- Modal Header -->
+																				<div class="modal-header">
+																					<h5 class="modal-title" id="archivedeleteModalLabel">Are you sure?</h5>																					
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+																				
+																				<div class="modal-body">
+																			    	<p class="ml-5" style="color:red">It will delete article permanently from system.</p>     
+																			    </div>
+							
+																				<!-- Modal footer -->
+																				<div class="modal-footer">
+																					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																					<a th:href="@{/editor/delete-article(article=${article.articleId})}">
+																						<button type="button" class="btn btn-danger">Yes</button>
+																					</a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	</th:block>
+															 
+															<div class="sj-downloadheader">
+																<div class="sj-title">
+																	<h3>Attached Document</h3>
+																	<a
+																		th:href="@{/download(type='article',file=${article.fileName})}"><i
+																		class="lnr lnr-download"></i>Download</a>
+
+																</div>
+																<div class="sj-docdetails">
+																	<figure class="sj-docimg">
+																		<img th:src="@{/img/doc-img.jpg}"
+																			alt="img description" src="">
+																	</figure>
+																	<div class="sj-docdescription">
+																		<h4 th:text="${'Document '+article.fileName}"></h4>
+																		<!-- <span>File Size 500kb</span> -->
+																	</div>
+																</div>
+															</div>
+														</div>
+														</div>													
+													</li>
+												</th:block>
+											</ul>
+											<nav id="submission-page-archive" class="mt-3 float-right">
+											</nav>
+										</th:block>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			</main>
+
+			<!--=========== BEGIN FOOTER SECTION ================-->
+
+
+			<div th:replace="/fragments/headerlayout :: footer"></div>
+
+			<!--=========== END FOOTER SECTION ================-->
+		</div>
+	</div>
+<!-- =============== BEGIN FEEDBACK AND REJECT MODAL DIALOG ================ -->
+<th:block th:each="article, articleStat : ${underreview}">
+<div class="sj-modalboxarea sj-modalboxareavtwo modal fade" tabindex="-1" role="dialog" th:id="${'feedbackmodal-'+articleStat.index}" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog" role="document">
+			<div class="sj-modalcontent modal-content">
+				<div class="sj-popuptitle">
+					<h2>Send Feedback</h2>
+					<a href="javascript;void(0);" class="sj-closebtn close"><i class="lnr lnr-cross" data-dismiss="modal" aria-label="Close"></i></a>
+				</div>
+				<div class="modal-body">
+					<form class="sj-formtheme sj-formsearchvthree" th:id="${'feedbackform-'+articleStat.index}" th:action="@{/editor/send-feedback}" method="post">
+						<input type="hidden" th:value="${article.articleId}" name="articleId">
+						<fieldset>
+							<span class="sj-replyaction">Reply To This Revision</span>
+							<div class="form-group">
+								<textarea placeholder="Add Description" th:id="${'feedbackMessage-'+articleStat.index}" name="feedbackMessage" required></textarea>
+								<script type="text/javascript" th:utext="${'CKEDITOR.replace(''feedbackMessage-'+articleStat.index+''');'}">
+							        
+							      </script>
+							</div>
+						</fieldset>
+					</form>
+					<div class="sj-popupbtn sj-popupbtnvtwo">
+						<button type="button" class="sj-btn sj-btnactive" th:id="${'feedback-submitbtn-'+articleStat.index}" onclick="submitFeedback(event)">Send Now</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--  STARING REJECT MODAL DIV -->
+	<div class="sj-modalboxarea sj-modalboxareavtwo modal fade" tabindex="-1" role="dialog" th:id="${'rejectmodal-'+articleStat.index}" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog" role="document">
+			<div class="sj-modalcontent modal-content">
+				<div class="sj-popuptitle">
+					<h2>Reject Article</h2>
+					<a href="javascript;void(0);" class="sj-closebtn close"><i class="lnr lnr-cross" data-dismiss="modal" aria-label="Close"></i></a>
+				</div>
+				<div class="modal-body">
+					<form class="sj-formtheme sj-formsearchvthree" th:id="${'rejectform-'+articleStat.index}" th:action="@{/editor/reject}" method="post">
+						<input type="hidden" th:value="${article.articleId}" name="articleId">
+						<fieldset>
+							<span class="sj-replyaction">Reject this article</span>
+							<div class="form-group">
+								<textarea placeholder="Add Description" th:id="${'rejectMessage-'+articleStat.index}" name="rejectMessage" required></textarea>
+								<script type="text/javascript" th:utext="${'CKEDITOR.replace(''rejectMessage-'+articleStat.index+''');'}">
+							        
+							      </script>
+							</div>
+						</fieldset>
+					</form>
+					<div class="sj-popupbtn sj-popupbtnvtwo">
+						<button type="button" class="sj-btn sj-btnactive" th:id="${'reject-submitbtn-'+articleStat.index}" onclick="submitReject(event)">Reject</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+<!-- =============== END OF FEEDBACK AND REJECT MODAL DIALOG ================ -->
+
+	<!-- Javascript Files
+    ================================================== -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"
+		type="text/javascript"></script>
+	<script th:src="@{/js/jquery-3.3.1.js}" type="text/javascript"></script>
+	<script th:src="@{/js/jquery-library.js}" type="text/javascript"></script>
+	<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/owl.carousel.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/circle-progress.js}" type="text/javascript"></script>
+	<script th:src="@{/js/scrollbar.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/chartist.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/countdown.js}" type="text/javascript"></script>
+	<script th:src="@{/js/appear.js}" type="text/javascript"></script>
+	<script th:src="@{/main.js}" type="text/javascript"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script defer
+		src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta/dist/js/bootstrap-select.min.js"
+		type="text/javascript"></script>
+	
+	<script th:src="@{/js/pagination.min.js}" type="text/javascript"></script>
+	<script>
+	/**
+	 * For pagination on Submission (Archive) page
+	 */
+	var archiveList = [];
+	
+		
+	$('ul#accordion-archive > li').each(function() {
+		archiveList.push($(this))
+	});
+	
+	if (archiveList.length > 0)
+	{
+		$('#submission-page-archive').pagination({
+		    dataSource: archiveList,
+		    pageSize: 10,
+		    autoHidePrevious: true,
+		    autoHideNext: true,
+		    hideWhenLessThanOnePage: true,
+		    className: 'paginationjs-theme-blue',
+		    
+		    
+		    callback: function(data, pagination) {
+		        
+		    	$('#accordion-archive').html(data);
+		    }
+		});
+	}
+	
+	
+	
+	/**
+	 * For pagination on Submission (Scheduled) page
+	 */
+	var scheduledList = [];
+	
+		
+	$('ul#accordion-scheduled > li').each(function() {
+		scheduledList.push($(this))
+	});
+	
+	if(scheduledList.length > 0)
+	{
+		$('#submission-page-scheduled').pagination({
+	    dataSource: scheduledList,
+	    pageSize: 10,
+	    autoHidePrevious: true,
+	    autoHideNext: true,
+	    hideWhenLessThanOnePage: true,
+	    className: 'paginationjs-theme-blue',
+	    
+	    
+	    callback: function(data, pagination) {
+	        
+	    	$('#accordion-scheduled').html(data);
+	    }
+		});
+	}
+	
+	
+	
+	/**
+	 * For pagination on Submission (Approved) page
+	 */
+	var approvedList = [];
+	
+	
+	
+	$('ul#accordion-approved > li').each(function() {
+		approvedList.push($(this))
+	});
+	
+	if(approvedList.length > 0)
+	{
+		$('#submission-page-approved').pagination({
+		    dataSource: approvedList,
+		    pageSize: 10,
+		    autoHidePrevious: true,
+		    autoHideNext: true,
+		    hideWhenLessThanOnePage: true,
+		    className: 'paginationjs-theme-blue',
+		    
+		    
+		    callback: function(data, pagination) {
+		        
+		    	$('#accordion-approved').html(data);
+		    }
+		});
+	}
+	
+	
+	
+	/**
+	 * For pagination on Submission (underreview) page
+	 */
+	var activeList = [];
+	
+	
+	
+	$('ul#accordion-underreview> li').each(function() {
+		activeList.push($(this))
+	});
+	
+	if(activeList.length > 0)
+	{
+		$('#submission-page-underreview').pagination({
+		    dataSource: activeList,
+		    pageSize: 10,
+		    autoHidePrevious: true,
+		    autoHideNext: true,
+		    hideWhenLessThanOnePage: true,
+		    className: 'paginationjs-theme-blue',
+		    
+		    
+		    callback: function(data, pagination) {
+		        
+		    	$('#accordion-underreview').html(data);
+		    }
+		});
+	}
+	
+	/**
+	 * For pagination on Submission (unassigned) page
+	 */
+	var unassignedList = [];
+	
+	
+	
+	$('ul#accordion-unassigned > li').each(function() {
+		unassignedList.push($(this))
+	});
+	
+	if(unassignedList.length > 0)
+	{
+		$('#submission-page-unassigned').pagination({
+		    dataSource: unassignedList,
+		    pageSize: 10,
+		    autoHidePrevious: true,
+		    autoHideNext: true,
+		    hideWhenLessThanOnePage: true,
+		    className: 'paginationjs-theme-blue',
+		    
+		    
+		    callback: function(data, pagination) {
+		        
+		    	$('#accordion-unassigned').html(data);
+		    }
+		});
+	}
+	
+	/**
+	 * For pagination on Submission (My Queue) page
+	 */
+	var meList = [];
+	
+	
+	
+	$('ul#accordion-me > li').each(function() {
+		meList.push($(this))
+	});
+	
+	if(meList.length > 0)
+	{
+		$('#submission-page-me').pagination({
+		    dataSource: meList,
+		    pageSize: 10,
+		    autoHidePrevious: true,
+		    autoHideNext: true,
+		    hideWhenLessThanOnePage: true,
+		    
+		    className: 'paginationjs-theme-blue',
+		    
+		    
+		    callback: function(data, pagination) {
+		        
+		    	$('#accordion-me').html(data);
+		    }
+		});
+	}
+	
+	
+</script>
+
+</body>
+
+
+</html>
