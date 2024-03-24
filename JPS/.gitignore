@@ -2,3 +2,5 @@
 /target/
 /FileStore/
 /.settings/
+.settings/*
+target/*
