@@ -1995,7 +1995,7 @@ Expr = Sizzle.selectors = {
 			return hash && hash.slice( 1 ) === elem.id;
 		},
 
-		"***REMOVED***": function( elem ) {
+		"root": function( elem ) {
 			return elem === docElem;
 		},
 
@@ -2899,8 +2899,8 @@ jQuery.fn.extend( {
 // Initialize a jQuery object
 
 
-// A central reference to the ***REMOVED*** jQuery(document)
-var ***REMOVED***jQuery,
+// A central reference to the root jQuery(document)
+var rootjQuery,
 
 	// A simple way to check for HTML strings
 	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
@@ -2908,7 +2908,7 @@ var ***REMOVED***jQuery,
 	// Shortcut simple #id case for speed
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/,
 
-	init = jQuery.fn.init = function( selector, context, ***REMOVED*** ) {
+	init = jQuery.fn.init = function( selector, context, root ) {
 		var match, elem;
 
 		// HANDLE: $(""), $(null), $(undefined), $(false)
@@ -2916,9 +2916,9 @@ var ***REMOVED***jQuery,
 			return this;
 		}
 
-		// Method init() accepts an alternate ***REMOVED***jQuery
+		// Method init() accepts an alternate rootjQuery
 		// so migrate can support jQuery.sub (gh-2101)
-		***REMOVED*** = ***REMOVED*** || ***REMOVED***jQuery;
+		root = root || rootjQuery;
 
 		// Handle HTML strings
 		if ( typeof selector === "string" ) {
@@ -2980,7 +2980,7 @@ var ***REMOVED***jQuery,
 
 			// HANDLE: $(expr, $(...))
 			} else if ( !context || context.jquery ) {
-				return ( context || ***REMOVED*** ).find( selector );
+				return ( context || root ).find( selector );
 
 			// HANDLE: $(expr, context)
 			// (which is just equivalent to: $(context).find(expr)
@@ -2997,8 +2997,8 @@ var ***REMOVED***jQuery,
 		// HANDLE: $(function)
 		// Shortcut for document ready
 		} else if ( isFunction( selector ) ) {
-			return ***REMOVED***.ready !== undefined ?
-				***REMOVED***.ready( selector ) :
+			return root.ready !== undefined ?
+				root.ready( selector ) :
 
 				// Execute immediately if ready is not present
 				selector( jQuery );
@@ -3011,7 +3011,7 @@ var ***REMOVED***jQuery,
 init.prototype = jQuery.fn;
 
 // Initialize central reference
-***REMOVED***jQuery = jQuery( document );
+rootjQuery = jQuery( document );
 
 
 var rparentsprev = /^(?:parents|prev(?:Until|All))/,
@@ -10050,7 +10050,7 @@ jQuery.fn.extend( {
 		} else {
 			offset = this.offset();
 
-			// Account for the *real* offset parent, which can be the document or its ***REMOVED*** element
+			// Account for the *real* offset parent, which can be the document or its root element
 			// when a statically positioned element is identified
 			doc = elem.ownerDocument;
 			offsetParent = elem.offsetParent || doc.documentElement;

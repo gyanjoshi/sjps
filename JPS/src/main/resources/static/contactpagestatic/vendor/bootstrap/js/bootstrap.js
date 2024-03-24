@@ -237,14 +237,14 @@ var Alert = function ($) {
     Alert.prototype.close = function close(element) {
       element = element || this._element;
 
-      var ***REMOVED***Element = this._getRootElement(element);
-      var customEvent = this._triggerCloseEvent(***REMOVED***Element);
+      var rootElement = this._getRootElement(element);
+      var customEvent = this._triggerCloseEvent(rootElement);
 
       if (customEvent.isDefaultPrevented()) {
         return;
       }
 
-      this._removeElement(***REMOVED***Element);
+      this._removeElement(rootElement);
     };
 
     Alert.prototype.dispose = function dispose() {
@@ -418,9 +418,9 @@ var Button = function ($) {
     Button.prototype.toggle = function toggle() {
       var triggerChangeEvent = true;
       var addAriaPressed = true;
-      var ***REMOVED***Element = $(this._element).closest(Selector.DATA_TOGGLE)[0];
+      var rootElement = $(this._element).closest(Selector.DATA_TOGGLE)[0];
 
-      if (***REMOVED***Element) {
+      if (rootElement) {
         var input = $(this._element).find(Selector.INPUT)[0];
 
         if (input) {
@@ -428,7 +428,7 @@ var Button = function ($) {
             if (input.checked && $(this._element).hasClass(ClassName.ACTIVE)) {
               triggerChangeEvent = false;
             } else {
-              var activeElement = $(***REMOVED***Element).find(Selector.ACTIVE)[0];
+              var activeElement = $(rootElement).find(Selector.ACTIVE)[0];
 
               if (activeElement) {
                 $(activeElement).removeClass(ClassName.ACTIVE);
@@ -437,7 +437,7 @@ var Button = function ($) {
           }
 
           if (triggerChangeEvent) {
-            if (input.hasAttribute('disabled') || ***REMOVED***Element.hasAttribute('disabled') || input.classList.contains('disabled') || ***REMOVED***Element.classList.contains('disabled')) {
+            if (input.hasAttribute('disabled') || rootElement.hasAttribute('disabled') || input.classList.contains('disabled') || rootElement.classList.contains('disabled')) {
               return;
             }
             input.checked = !$(this._element).hasClass(ClassName.ACTIVE);
