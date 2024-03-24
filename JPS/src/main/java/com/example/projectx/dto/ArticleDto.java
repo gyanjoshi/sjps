@@ -1,7 +1,6 @@
 package com.example.projectx.dto;
 
 import java.util.Date;
-import java.util.List;
 
 
 public class ArticleDto {

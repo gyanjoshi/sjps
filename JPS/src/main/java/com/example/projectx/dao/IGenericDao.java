@@ -3,8 +3,6 @@ package com.example.projectx.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import com.example.projectx.model.JournalSection;
-
 public interface IGenericDao<T extends Serializable> {
 
 	   T findOne(Class<T> _clazz, final long id);

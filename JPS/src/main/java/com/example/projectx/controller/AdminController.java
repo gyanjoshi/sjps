@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
 import java.security.Principal;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -35,7 +33,6 @@ import com.example.projectx.form.AddDownloadForm;
 import com.example.projectx.form.AddNoticeForm;
 import com.example.projectx.form.EditorProfileForm;
 import com.example.projectx.form.PasswordChangeForm;
-import com.example.projectx.form.PasswordResetForm;
 import com.example.projectx.form.UserForm;
 import com.example.projectx.model.AppUser;
 import com.example.projectx.model.Download;

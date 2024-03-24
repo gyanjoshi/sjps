@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.projectx.dto.ArticleDto;
 import com.example.projectx.model.Article;
-import com.example.projectx.model.Person;
 
 public interface ArticleRepository extends JpaRepository<Article , Integer> {
 

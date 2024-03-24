@@ -163,6 +163,7 @@
 								  <div class="input-group-prepend">
 								    <span class="input-group-text" id="journalissue-inputgroup1">Journal Issue</span>
 								  </div>
+								  <input type="hidden" th:field="*{journalId}">
 								  
 								  	<select th:field="*{journalIssueId}" class="form-control" id="journalIssueId" required aria-label="Sizing example input2" aria-describedby="journalissue-inputgroup1">
 								    	<option selected style="display:none" value="">Select Journal Issue</option> 

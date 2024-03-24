@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <springProfile name="dev">
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+		<logger name="org.springframework" level="INFO"/>
+        <logger name="com.example.projectx" level="DEBUG"/>
+        
+        <***REMOVED*** level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </***REMOVED***>
+    </springProfile>
+
+    
+    
+    <springProfile name="prod">
+        <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">            
+			<file>FileStore/application.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>FileStore/application.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <!-- each archived file, size max 100KB -->
+                <maxFileSize>100KB</maxFileSize>
+                <!-- total size of all archive files, if total size > 2MB, it will delete old archived file -->
+                <totalSizeCap>2MB</totalSizeCap>
+                <!-- 30 days to keep -->
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+
+            <encoder>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="com.example.projectx" level="DEBUG"/>
+        <***REMOVED*** level="ERROR">
+            <appender-ref ref="FILE-ROLLING"/>
+        </***REMOVED***>
+    </springProfile>
+
+</configuration>

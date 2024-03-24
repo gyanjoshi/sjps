@@ -3,7 +3,6 @@ package com.example.projectx.service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,14 +14,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
-import javax.validation.Valid;
-
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,7 +45,6 @@ import com.example.projectx.repository.ArticleRepository;
 import com.example.projectx.repository.EditorRepository;
 import com.example.projectx.repository.JournalIssueRepository;
 import com.example.projectx.repository.PersonRepository;
-import com.example.projectx.utils.EmailValidator;
 
 @Service
 public class EditorService {

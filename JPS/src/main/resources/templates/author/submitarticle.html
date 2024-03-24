@@ -136,15 +136,10 @@
 														<h3>Upload Article in Microsoft word format</h3>
 														<p class="alert alert-danger" th:if="${#fields.hasErrors('fileData')}" th:errors="*{fileData}">
 													</div>
-													<div class="form-group">
-														
+													<div class="form-group">														
 														<input th:field="*{fileData}" type="file" name="file"
 															value="file" id="file" accept=".doc,.docx, application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword">
-													</div>
-													<div class="sj-filedetails">
-														<span>File should be max 500kb </span>
-														<em>Not Uploaded Yet</em>
-													</div>
+													</div>													
 												</div>
 												
 											</fieldset>

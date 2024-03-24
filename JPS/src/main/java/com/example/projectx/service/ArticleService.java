@@ -3,14 +3,9 @@ package com.example.projectx.service;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
-
 import javax.mail.MessagingException;
-import javax.validation.Valid;
-
 import org.apache.commons.io.FilenameUtils;
 
 import org.slf4j.Logger;
@@ -23,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.projectx.dao.ArticleDao;
-import com.example.projectx.dao.JournalDao;
 import com.example.projectx.dto.ArticleDto;
 import com.example.projectx.exception.ArticleNotFoundException;
 import com.example.projectx.exception.InvalidCategoryException;
@@ -35,11 +29,9 @@ import com.example.projectx.mail.Mail;
 import com.example.projectx.model.AppUser;
 import com.example.projectx.model.Article;
 import com.example.projectx.model.Category;
-import com.example.projectx.model.JournalIssue;
 import com.example.projectx.model.Person;
 import com.example.projectx.repository.ArticleRepository;
 import com.example.projectx.repository.CategoryRepository;
-import com.example.projectx.repository.JournalIssueRepository;
 import com.example.projectx.repository.PersonRepository;
 
 @Service
