@@ -392,7 +392,7 @@ Fixed Issues:
 * [#16820](https://dev.ckeditor.com/ticket/16820): [IE10] Fixed: Clicking below a single horizontal rule throws an error.
 * [#426](https://github.com/ckeditor/ckeditor-dev/issues/426): Fixed: The [`range.cloneContents()`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dom_range.html#method-cloneContents) method selects the whole element when the selection starts at the beginning of that element.
 * [#644](https://github.com/ckeditor/ckeditor-dev/issues/644): Fixed: The [`range.extractContents()`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dom_range.html#method-extractContents) method returns an incorrect result when multiple nodes are selected.
-* [#684](https://github.com/ckeditor/ckeditor-dev/issues/684): Fixed: The [`elementPath.contains()`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dom_elementPath.html#method-contains) method incorrectly excludes the last element instead of ***REMOVED*** when the `fromTop` parameter is set to `true`.
+* [#684](https://github.com/ckeditor/ckeditor-dev/issues/684): Fixed: The [`elementPath.contains()`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dom_elementPath.html#method-contains) method incorrectly excludes the last element instead of root when the `fromTop` parameter is set to `true`.
 
 Other Changes:
 
@@ -1266,7 +1266,7 @@ Fixed Issues:
 
 Fixed Issues:
 
-* [#11500](https://dev.ckeditor.com/ticket/11500): [WebKit/Blink] Fixed: Selection lost when setting data in another inline editor. Additionally, [`selection.removeAllRanges()`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dom_selection.html#method-removeAllRanges) is now scoped to selection's [***REMOVED***](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dom_selection.html#property-***REMOVED***).
+* [#11500](https://dev.ckeditor.com/ticket/11500): [WebKit/Blink] Fixed: Selection lost when setting data in another inline editor. Additionally, [`selection.removeAllRanges()`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dom_selection.html#method-removeAllRanges) is now scoped to selection's [root](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dom_selection.html#property-root).
 * [#11104](https://dev.ckeditor.com/ticket/11104): [IE] Fixed: Various issues with scrolling and selection when focusing widgets.
 * [#11487](https://dev.ckeditor.com/ticket/11487): Moving mouse over the [Enhanced Image](https://ckeditor.com/cke4/addon/image2) widget will no longer change the value returned by the [`editor.checkDirty()`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#method-checkDirty) method.
 * [#8673](https://dev.ckeditor.com/ticket/8673): [WebKit] Fixed: Cannot select and remove the [Page Break](https://ckeditor.com/cke4/addon/pagebreak).

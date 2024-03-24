@@ -294,7 +294,7 @@ public class IndexController {
 	@RequestMapping(value="/error", method = RequestMethod.GET)
 	public ModelAndView errorPage() {
 	    ModelAndView mav = new ModelAndView();
-	    String errorMessage= "Error occured. Please contact site administrator @ ***REMOVED***";
+	    String errorMessage= "Error occured. Please contact site administrator @ editor.craiaj2019@gmail.com";
 	    mav.addObject("errorMsg", errorMessage);
 	    mav.setViewName("error");
 	    return mav;
