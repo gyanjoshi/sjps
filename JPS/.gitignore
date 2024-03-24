@@ -7,6 +7,15 @@
 /target/*
 Servers/
 Servers/*
+.settings/*
+.settings
+FileStore/*
+FileStore/
+FileStore
+target/
+target/*
+target
+
 
 HELP.md
 target/
