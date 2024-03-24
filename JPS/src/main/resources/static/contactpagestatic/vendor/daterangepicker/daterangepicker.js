@@ -6,12 +6,12 @@
 * @website: http://www.daterangepicker.com/
 */
 // Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
-(function (***REMOVED***, factory) {
+(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Make globaly available as well
         define(['moment', 'jquery'], function (moment, jquery) {
             if (!jquery.fn) jquery.fn = {}; // webpack server rendering
-            return (***REMOVED***.daterangepicker = factory(moment, jquery));
+            return (root.daterangepicker = factory(moment, jquery));
         });
     } else if (typeof module === 'object' && module.exports) {
         // Node / Browserify
@@ -25,7 +25,7 @@
         module.exports = factory(moment, jQuery);
     } else {
         // Browser globals
-        ***REMOVED***.daterangepicker = factory(***REMOVED***.moment, ***REMOVED***.jQuery);
+        root.daterangepicker = factory(root.moment, root.jQuery);
     }
 }(this, function(moment, $) {
     var DateRangePicker = function(element, options, cb) {

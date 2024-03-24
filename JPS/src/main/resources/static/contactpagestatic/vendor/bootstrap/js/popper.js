@@ -211,11 +211,11 @@ function isOffsetContainer(element) {
 }
 
 /**
- * Finds the ***REMOVED*** node (document, shadowDOM ***REMOVED***) of the given element
+ * Finds the root node (document, shadowDOM root) of the given element
  * @method
  * @memberof Popper.Utils
  * @argument {Element} node
- * @returns {Element} ***REMOVED*** node
+ * @returns {Element} root node
  */
 function getRoot(node) {
   if (node.parentNode !== null) {
@@ -261,9 +261,9 @@ function findCommonOffsetParent(element1, element2) {
   }
 
   // one of the nodes is inside shadowDOM, find which one
-  var element1***REMOVED*** = getRoot(element1);
-  if (element1***REMOVED***.host) {
-    return findCommonOffsetParent(element1***REMOVED***.host, element2);
+  var element1root = getRoot(element1);
+  if (element1root.host) {
+    return findCommonOffsetParent(element1root.host, element2);
   } else {
     return findCommonOffsetParent(element1, getRoot(element2).host);
   }

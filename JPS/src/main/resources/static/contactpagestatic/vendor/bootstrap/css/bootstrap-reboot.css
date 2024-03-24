@@ -172,7 +172,7 @@ img {
   border-style: none;
 }
 
-svg:not(:***REMOVED***) {
+svg:not(:root) {
   overflow: hidden;
 }
 
