@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.projectx.dto.UserDto;
 import com.example.projectx.model.AppUser;
-import com.example.projectx.model.Person;
 
 
 public interface UserRepository extends JpaRepository<AppUser, Long> {

@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.projectx.dto.ArticleDto;
 import com.example.projectx.model.AppUser;
 import com.example.projectx.model.Article;
-import com.example.projectx.model.JournalIssue;
 import com.example.projectx.model.Person;
 
 @Repository

@@ -92,8 +92,8 @@
 							<div class="sj-bannercontent">
 								<h1><span>We Welcome Latest</span>Research Articles in<span>Field of Social Science</span></h1>
 								<div class="sj-description">
-									<span th:utext="${#strings.abbreviate(page.html,200)}"></span>
-                					<span ><a th:href="@{/aboutus}" >Read more</a></span>
+									<span th:utext="${#strings.abbreviate(page.html,600)}"></span>
+                					<span><a th:href="@{/aboutus}" >Read more</a></span>
 								</div>
 							</div>
 						</div>
@@ -173,24 +173,9 @@
 											
 										<div class="owl-stage-outer">
 										<div class="owl-stage" style="transform: translate3d(-1690px, 0px, 0px); transition: all 0.25s ease 0s; width: 3211px;">
-										<div th:each="issue: ${issues}" class="owl-item cloned" style="width: 149px; margin-right: 20px;">
-										<div class="item">
-												<div class="sj-upcomingbook">
-													<figure class="sj-upcomingbookimg">
-														<img th:if="*{coverimages.get(issue.journalIssueId) != null}"
-															 th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(coverimages.get(issue.journalIssueId))}}"
-															/>
-													</figure>
-													<div class="sj-postcontent">
-														<h3><a th:href="@{/viewjournal(jid=${issue.journalId}, jiid=${issue.journalIssueId})}" 
-															   th:text="${issue.month+' '+issue.year+', Vol-'+issue.VolumeNum+', Issue-'+issue.IssueNum}"></a>
-														</h3>
-														<p class="singCourse_price">Published Date: <span th:text="${issue.publishDate}"></span></p>														
-													</div>
-												</div>
-											</div>
-											</div>
-											<div th:each="issue: ${issues}" class="owl-item" style="width: 149px; margin-right: 20px;">
+											<th:block th:each="issue, issueStat: ${issues}">
+											 <th:block th:if="${issueStat.index <= 5}">
+											<div class="owl-item active" style="width: 149px; margin-right: 20px;">
 											<div class="item">
 												<div class="sj-upcomingbook">
 													<figure class="sj-upcomingbookimg">
@@ -207,7 +192,9 @@
 												</div>
 											</div>
 											</div>
-											<div th:each="issue: ${issues}"  class="owl-item active" style="width: 149px; margin-right: 20px;">
+											</th:block>
+											<th:block th:if="${issueStat.index > 5}">
+											<div class="owl-item" style="width: 149px; margin-right: 20px;">
 											<div class="item">
 												<div class="sj-upcomingbook">
 													<figure class="sj-upcomingbookimg">
@@ -223,6 +210,8 @@
 													</div>
 												</div>
 											</div></div>
+											</th:block>
+											</th:block>
 											</div></div>
 											<div class="sj-slidernav">
 												<div class="sj-prev"><span class="fa fa-angle-left"></span></div>

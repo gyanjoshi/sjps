@@ -10,14 +10,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
-
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.projectx.dao.GenericDao;
 import com.example.projectx.dao.IGenericDao;
 import com.example.projectx.dao.JournalDao;
 import com.example.projectx.dto.JournalDropDownDto;
@@ -46,7 +42,6 @@ import com.example.projectx.model.JournalSection;
 import com.example.projectx.repository.ArticleRepository;
 import com.example.projectx.repository.JournalIssueRepository;
 import com.example.projectx.repository.JournalRepository;
-import com.example.projectx.utils.EmailValidator;
 
 @Service
 public class JournalService {
@@ -395,6 +390,8 @@ public class JournalService {
 		}
 		
 		//5. Check if there is at least 1 Editorial section
+		
+		
 		Article editorial = sa.stream().filter(a -> a.getJournalsection().getSectionName().toLowerCase().contains("editorial"))
 					.findFirst().orElse(null);
 		

@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
-import javax.validation.Valid;
-
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,8 +46,6 @@ import com.example.projectx.utils.EmailValidator;
 import com.example.projectx.utils.EncryptedPasswordUtils;
 import com.example.projectx.utils.ImageUtils;
 import com.example.projectx.utils.PasswordGenerator;
-
-import jdk.internal.jline.internal.Log;
 
 
 @Service

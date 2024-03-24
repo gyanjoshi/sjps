@@ -132,7 +132,7 @@
 										<tr th:each="notice : ${notices}">
 											<td th:text="${notice.NoticeNumber}"></td>
 											<td th:text="${notice.NoticeTitle}"></td>
-											<td th:text="${notice.noticeText}"></td>
+											<td th:text="${#strings.abbreviate(notice.noticeText, 400)}"></td>											
 											<td th:text="${notice.UploadedDate}"></td>
 											<td th:text="${notice.NoticeFileName}"></td>
 											<td>

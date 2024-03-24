@@ -1,13 +1,11 @@
 package com.example.projectx.controller;
 
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -19,7 +17,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +27,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.projectx.dto.ArticleDto;
 import com.example.projectx.dto.JournalIssueDto;
-import com.example.projectx.dto.PreparedJournalDto;
 import com.example.projectx.exception.ArticleNotFoundException;
 import com.example.projectx.exception.UnauthorizedAccessException;
 import com.example.projectx.form.EditorProfileForm;
@@ -54,7 +50,6 @@ import com.example.projectx.model.Editor;
 import com.example.projectx.model.Journal;
 import com.example.projectx.model.JournalIssue;
 import com.example.projectx.model.JournalSection;
-import com.example.projectx.model.Person;
 import com.example.projectx.repository.EditorRepository;
 import com.example.projectx.repository.JournalIssueRepository;
 import com.example.projectx.repository.JournalRepository;

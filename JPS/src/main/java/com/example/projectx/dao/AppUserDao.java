@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 
 import com.example.projectx.model.AppRole;
 import com.example.projectx.model.AppUser;
-import com.example.projectx.model.Person;
 import com.example.projectx.model.Qualification;
 import com.example.projectx.model.Title;
 
