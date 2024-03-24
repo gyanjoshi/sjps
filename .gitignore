@@ -1,0 +1,9 @@
+/.metadata/
+/.classpath/
+/.settings/*
+/FileStore/
+/FileStore/*
+/target/
+/target/*
+Servers/
+Servers/*
